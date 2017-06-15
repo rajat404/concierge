@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-
-# Third Party Stuff
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from concierge.base.models import UUIDModel
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
-# concierge Stuff
-from concierge.base.models import UUIDModel
 
 
 class UserManager(BaseUserManager):
@@ -31,8 +28,32 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, True, True, **extra_fields)
 
 
+class UserType(models.Model):
+    kind = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'users_usertype'
+        verbose_name = _('UserType')
+        verbose_name_plural = _('UserTypes')
+
+
 @python_2_unicode_compatible
 class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ('O', 'Others')
+    )
+
+    # TSHIRT_SIZE_CHOICES = (
+    #     ('U', 'UNDECIDED'),
+    #     ('S', 'S'),
+    #     ('M', 'M'),
+    #     ('L', 'L'),
+    #     ('XL', 'XL'),
+    #     ('XXL', 'XXL'),
+    # )
+
     first_name = models.CharField(_('First Name'), max_length=120, blank=True)
     last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
     email = models.EmailField(_('email address'), unique=True, db_index=True)
@@ -43,11 +64,19 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
                                     help_text='Designates whether this user should be treated as '
                                               'active. Unselect this instead of deleting accounts.')
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    institution = models.CharField(max_length=100, blank=True)
+    # kind = models.ManyToManyField(UserType)
+    github_username = models.CharField(max_length=100, blank=True)
+    twitter_username = models.CharField(max_length=100, blank=True)
+    contact = models.CharField(max_length=15, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
+    # tshirt_size = models.CharField(max_length=1, choices=TSHIRT_SIZE_CHOICES, default='U')
 
     USERNAME_FIELD = 'email'
     objects = UserManager()
 
     class Meta:
+        db_table = 'users_users'
         verbose_name = _('user')
         verbose_name_plural = _('users')
         ordering = ('-date_joined', )

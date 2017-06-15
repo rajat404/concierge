@@ -29,14 +29,18 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # 'django.contrib.humanize',  # Useful template tags
 
-    'concierge.base',
-    'concierge.users',
-
     'rest_framework',  # http://www.django-rest-framework.org/
     'rest_framework_swagger',
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 
     'compressor',
+    'autoslug',
+    'waffle',
+
+    'concierge.base',
+    'concierge.users',
+    'concierge.concourse',
+
 )
 
 # INSTALLED APPS CONFIGURATION
