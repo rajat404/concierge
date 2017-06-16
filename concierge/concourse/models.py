@@ -49,9 +49,23 @@ class Concourse(TimeStampedSlugModel):
         verbose_name_plural = _('Concourses')
 
 
+class SponsorCategory(TimeStampedModel):
+    """To be added by Admin, prior to adding Sponsors"""
+    name = models.CharField(max_length=50, unique=True)
+
+    def __str__(self):
+        return self.slug
+
+    class Meta:
+        db_table = 'concourse_sponsor_category'
+        verbose_name = _('SponsorCategory')
+        verbose_name_plural = _('SponsorCategories')
+
+
 class Sponsor(TimeStampedModel):
     concourse = models.ForeignKey(Concourse)
     organisation = models.ForeignKey(Organisation, null=True, blank=True)
+    category = models.ForeignKey(SponsorCategory)
 
     def __str__(self):
         return self.slug
@@ -62,8 +76,8 @@ class Sponsor(TimeStampedModel):
         verbose_name_plural = _('Sponsors')
 
 
-class Speaker(TimeStampedModel):
-    name = models.CharField(max_length=100)
+class Speaker(TimeStampedSlugModel):
+    concourse = models.ForeignKey(Concourse)
     about = models.TextField(max_length=10000)
 
     def __str__(self):

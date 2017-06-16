@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 
 
 class UserType(models.Model):
-    kind = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
 
     class Meta:
         db_table = 'users_usertype'
@@ -76,7 +76,7 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
-        db_table = 'users_users'
+        db_table = 'users_user'
         verbose_name = _('user')
         verbose_name_plural = _('users')
         ordering = ('-date_joined', )
