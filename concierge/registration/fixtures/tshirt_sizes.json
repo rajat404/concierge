@@ -1,0 +1,44 @@
+[
+  {
+    "model": "registration.tshirtsize",
+    "pk": 1,
+    "fields": {
+      "size": "S"
+    }
+  },
+  {
+    "model": "registration.tshirtsize",
+    "pk": 2,
+    "fields": {
+      "size": "M"
+    }
+  },
+  {
+    "model": "registration.tshirtsize",
+    "pk": 3,
+    "fields": {
+      "size": "L"
+    }
+  },
+  {
+    "model": "registration.tshirtsize",
+    "pk": 4,
+    "fields": {
+      "size": "XL"
+    }
+  },
+  {
+    "model": "registration.tshirtsize",
+    "pk": 5,
+    "fields": {
+      "size": "XXL"
+    }
+  },
+  {
+    "model": "registration.tshirtsize",
+    "pk": 6,
+    "fields": {
+      "size": "XXXL"
+    }
+  }
+]

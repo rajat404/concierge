@@ -28,15 +28,6 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, True, True, **extra_fields)
 
 
-class UserType(models.Model):
-    name = models.CharField(max_length=30)
-
-    class Meta:
-        db_table = 'users_usertype'
-        verbose_name = _('UserType')
-        verbose_name_plural = _('UserTypes')
-
-
 @python_2_unicode_compatible
 class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
     GENDER_CHOICES = (
@@ -44,15 +35,6 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
         ('F', 'Female'),
         ('O', 'Others')
     )
-
-    # TSHIRT_SIZE_CHOICES = (
-    #     ('U', 'UNDECIDED'),
-    #     ('S', 'S'),
-    #     ('M', 'M'),
-    #     ('L', 'L'),
-    #     ('XL', 'XL'),
-    #     ('XXL', 'XXL'),
-    # )
 
     first_name = models.CharField(_('First Name'), max_length=120, blank=True)
     last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
@@ -65,12 +47,10 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
                                               'active. Unselect this instead of deleting accounts.')
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     institution = models.CharField(max_length=100, blank=True)
-    # kind = models.ManyToManyField(UserType)
     github_username = models.CharField(max_length=100, blank=True)
     twitter_username = models.CharField(max_length=100, blank=True)
     contact = models.CharField(max_length=15, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True)
-    # tshirt_size = models.CharField(max_length=1, choices=TSHIRT_SIZE_CHOICES, default='U')
 
     USERNAME_FIELD = 'email'
     objects = UserManager()

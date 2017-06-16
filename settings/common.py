@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'concierge.users',
     'concierge.concourse',
     'concierge.questionnaire',
+    'concierge.registration',
 
 )
 
