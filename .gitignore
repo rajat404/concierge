@@ -133,3 +133,6 @@ ENV/
 
 # Others
 .staticfiles/
+
+# Remove before initial release
+migrations/
