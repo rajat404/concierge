@@ -18,7 +18,8 @@ env = environ.Env()
 # ==========================================================================
 # List of strings representing installed apps.
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = (
+
+DJANGO_INIT_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -35,15 +36,21 @@ INSTALLED_APPS = (
 
     'compressor',
     'autoslug',
-    'waffle',
+)
 
+THIRD_PARTY_APPS = (
+    'waffle',
+)
+
+CUSTOM_APPS = (
     'concierge.base',
     'concierge.users',
     'concierge.concourse',
     'concierge.questionnaire',
     'concierge.registration',
-
 )
+
+INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================

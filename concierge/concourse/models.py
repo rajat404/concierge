@@ -21,6 +21,21 @@ class Organisation(TimeStampedSlugModel):
         verbose_name_plural = _('Organisations')
 
 
+class Speaker(TimeStampedModel):
+    first_name = models.CharField(_('First Name'), max_length=120, blank=True)
+    last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
+    email = models.EmailField(_('email address'), unique=True, db_index=True)
+    about = models.TextField(max_length=10000)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        db_table = 'concourse_speaker'
+        verbose_name = _('Speaker')
+        verbose_name_plural = _('Speakers')
+
+
 class Concourse(TimeStampedSlugModel):
     CONCOURSE_TYPE = (
         ('EVENT', 'EVENT'),
@@ -36,8 +51,7 @@ class Concourse(TimeStampedSlugModel):
 
     kind = models.CharField(max_length=15, choices=CONCOURSE_TYPE)
     event = models.ForeignKey("self", blank=True, null=True)
-    # event = models.ForeignKey("self", models.SET_NULL, blank=True, null=True)
-    # speaker = models.ManyToManyField(User, blank=True, null=True) #separate model
+    speaker = models.ForeignKey(Speaker, null=True, blank=True, related_name='concourses')
     # TODO: Social media fields -  hashtag, handle etc
 
     def __str__(self):
@@ -49,17 +63,17 @@ class Concourse(TimeStampedSlugModel):
         verbose_name_plural = _('Concourses')
 
 
-class SponsorCategory(TimeStampedModel):
-    """To be added by Admin, prior to adding Sponsors"""
+class SponsorCategory(models.Model):
+    """To be added via Admin Panel(or Fixture), prior to adding Sponsors"""
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
-        return self.slug
+        return self.name
 
     class Meta:
         db_table = 'concourse_sponsor_category'
-        verbose_name = _('SponsorCategory')
-        verbose_name_plural = _('SponsorCategories')
+        verbose_name = _('Sponsor Category')
+        verbose_name_plural = _('Sponsor Categories')
 
 
 class Sponsor(TimeStampedModel):
@@ -67,23 +81,7 @@ class Sponsor(TimeStampedModel):
     organisation = models.ForeignKey(Organisation, null=True, blank=True)
     category = models.ForeignKey(SponsorCategory)
 
-    def __str__(self):
-        return self.slug
-
     class Meta:
         db_table = 'concourse_sponsor'
         verbose_name = _('Sponsor')
         verbose_name_plural = _('Sponsors')
-
-
-class Speaker(TimeStampedSlugModel):
-    concourse = models.ForeignKey(Concourse)
-    about = models.TextField(max_length=10000)
-
-    def __str__(self):
-        return self.id
-
-    class Meta:
-        db_table = 'concourse_speaker'
-        verbose_name = _('Speaker')
-        verbose_name_plural = _('Speakers')

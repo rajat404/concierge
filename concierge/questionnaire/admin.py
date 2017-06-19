@@ -1,3 +1,26 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+class QuestionnaireAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'id',
+        'created',
+        'modified',
+        'question',
+        'description',
+        'kind',
+        'required',
+        'choices',
+        'correct_choices',
+    )
+    list_filter = ('created', 'modified', 'required')
+
+
+def _register(model, admin_class):
+    admin.site.register(model, admin_class)
+
+
+_register(models.Questionnaire, QuestionnaireAdmin)

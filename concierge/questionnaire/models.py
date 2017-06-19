@@ -15,14 +15,14 @@ class Questionnaire(TimeStampedModel):
     question = models.TextField(blank=False)
     description = models.TextField(blank=True)
     kind = models.CharField(max_length=15, choices=QUESTIONNAIRE_TYPES)
-    required = models.BooleanField(default=False)
-    paragraph = models.TextField(blank=True)
+    required = models.BooleanField(default=False)  # Is this field mandatory?
     choices = JSONField(null=True)
+    # Array field to support selection of multiple choices
     correct_choices = ArrayField(models.CharField(max_length=100, blank=True),
                                 null=True, blank=True)
 
     def __str__(self):
-        return self.slug
+        return self.question
 
     class Meta:
         db_table = 'questionnaire_questionnaire'

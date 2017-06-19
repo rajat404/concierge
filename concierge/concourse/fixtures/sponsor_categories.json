@@ -1,0 +1,30 @@
+[
+  {
+    "model": "concourse.sponsorcategory",
+    "pk": 1,
+    "fields": {
+      "name": "ASSOCIATE"
+    }
+  },
+  {
+    "model": "concourse.sponsorcategory",
+    "pk": 2,
+    "fields": {
+      "name": "SILVER"
+    }
+  },
+  {
+    "model": "concourse.sponsorcategory",
+    "pk": 3,
+    "fields": {
+      "name": "GOLD"
+    }
+  },
+  {
+    "model": "concourse.sponsorcategory",
+    "pk": 4,
+    "fields": {
+      "name": "PLATINUM"
+    }
+  }
+]
