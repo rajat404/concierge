@@ -52,7 +52,7 @@ class Concourse(TimeStampedSlugModel):
     kind = models.CharField(max_length=15, choices=CONCOURSE_TYPE)
     event = models.ForeignKey("self", blank=True, null=True)
     speaker = models.ForeignKey(Speaker, null=True, blank=True, related_name='concourses')
-    # TODO: Social media fields -  hashtag, handle etc
+    venue = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return self.slug

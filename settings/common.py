@@ -47,7 +47,9 @@ CUSTOM_APPS = (
     'concierge.users',
     'concierge.concourse',
     'concierge.questionnaire',
+    'concierge.participant',
     'concierge.registration',
+    'concierge.feedback',
 )
 
 INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
