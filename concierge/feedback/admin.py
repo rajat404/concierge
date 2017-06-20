@@ -9,12 +9,13 @@ class FeedbackAdmin(admin.ModelAdmin):
         'id',
         'created',
         'modified',
-        'participant',
         'questionnaire',
         'text_response',
+        'file_response',
         'choice_response',
+        'participant',
     )
-    list_filter = ('created', 'modified', 'participant', 'questionnaire')
+    list_filter = ('created', 'modified', 'questionnaire', 'participant')
 
 
 def _register(model, admin_class):

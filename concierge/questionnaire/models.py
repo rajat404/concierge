@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Questionnaire(TimeStampedModel):
-    QUESTIONNAIRE_TYPES = (
+    RESPONSE_TYPES = (
         ('MCQ', 'MCQ'),
         ('PARAGRAPH', 'PARAGRAPH'),
         ('FILE', 'FILE'),
@@ -14,8 +14,8 @@ class Questionnaire(TimeStampedModel):
     )
 
     question = models.TextField(blank=False)
-    description = models.TextField(blank=True)
-    kind = models.CharField(max_length=15, choices=QUESTIONNAIRE_TYPES)
+    # description = models.TextField(blank=True)
+    kind = models.CharField(max_length=15, choices=RESPONSE_TYPES)
     label = models.CharField(max_length=50, blank=True)  # Short description for devs
     required = models.BooleanField(default=False)  # Is this field mandatory?
     choices = JSONField(null=True)
@@ -33,10 +33,14 @@ class Questionnaire(TimeStampedModel):
 
 
 class QuestionnaireHelper(TimeStampedModel):
-    """Abstract model to use `Questionnaire` in your app"""
+    """Abstract model to use `Questionnaire` in your app
+
+    After inheriting `QuestionnaireHelper` in your model,
+    add a separate field for `User` or `Participant`
+    """
     questionnaire = models.ForeignKey(Questionnaire)
+    # User/Participant's response to the question
     text_response = models.TextField(blank=True)
-    # Participant's response to the question
     file_response = models.FileField(upload_to='file_response', blank=True)
     choice_response = ArrayField(models.CharField(max_length=100, blank=True),
                                  null=True, blank=True)

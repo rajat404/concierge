@@ -10,7 +10,6 @@ class QuestionnaireAdmin(admin.ModelAdmin):
         'created',
         'modified',
         'question',
-        'description',
         'kind',
         'required',
         'choices',
