@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 from . import models
+from ..base.admin import CommonAdmin
 
 
-class RegistrationAdmin(admin.ModelAdmin):
+class RegistrationAdmin(CommonAdmin):
 
     list_display = (
         'id',

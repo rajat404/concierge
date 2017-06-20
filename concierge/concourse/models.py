@@ -12,13 +12,13 @@ class Organisation(TimeStampedSlugModel):
 
     kind = models.CharField(max_length=15, choices=ORG_TYPE)
 
-    def __str__(self):
-        return self.slug
-
     class Meta:
         db_table = 'organisation_organisation'
         verbose_name = _('Organisation')
         verbose_name_plural = _('Organisations')
+
+    def __str__(self):
+        return self.slug
 
 
 class Speaker(TimeStampedModel):
@@ -54,26 +54,26 @@ class Concourse(TimeStampedSlugModel):
     speaker = models.ForeignKey(Speaker, null=True, blank=True, related_name='concourses')
     venue = models.CharField(max_length=100, null=True, blank=True)
 
-    def __str__(self):
-        return self.slug
-
     class Meta:
         db_table = 'concourse_concourse'
         verbose_name = _('Concourse')
         verbose_name_plural = _('Concourses')
+
+    def __str__(self):
+        return self.slug
 
 
 class SponsorCategory(models.Model):
     """To be added via Admin Panel(or Fixture), prior to adding Sponsors"""
     name = models.CharField(max_length=50, unique=True)
 
-    def __str__(self):
-        return self.name
-
     class Meta:
         db_table = 'concourse_sponsor_category'
         verbose_name = _('Sponsor Category')
         verbose_name_plural = _('Sponsor Categories')
+
+    def __str__(self):
+        return self.name
 
 
 class Sponsor(TimeStampedModel):

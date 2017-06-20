@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 from . import models
+from ..base.admin import CommonAdmin
 
 
-class FeedbackAdmin(admin.ModelAdmin):
+class FeedbackAdmin(CommonAdmin):
 
     list_display = (
         'id',

@@ -1,19 +1,20 @@
 from django.contrib import admin
 
 from . import models
+from ..base.admin import CommonAdmin
 
 
-class TshirtSizeAdmin(admin.ModelAdmin):
+class TshirtSizeAdmin(CommonAdmin):
 
     list_display = ('id', 'size')
 
 
-class ParticipantTypeAdmin(admin.ModelAdmin):
+class ParticipantTypeAdmin(CommonAdmin):
 
     list_display = ('id', 'kind')
 
 
-class ParticipantAdmin(admin.ModelAdmin):
+class ParticipantAdmin(CommonAdmin):
 
     list_display = (
         'id',

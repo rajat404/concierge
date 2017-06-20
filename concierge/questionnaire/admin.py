@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 from . import models
+from ..base.admin import CommonAdmin
 
 
-class QuestionnaireAdmin(admin.ModelAdmin):
+class QuestionnaireAdmin(CommonAdmin):
 
     list_display = (
         'id',

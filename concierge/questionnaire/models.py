@@ -21,15 +21,15 @@ class Questionnaire(TimeStampedModel):
     choices = JSONField(null=True)
     # Array field to support selection of multiple choices
     correct_choices = ArrayField(models.CharField(max_length=100, blank=True),
-                                null=True, blank=True)
-
-    def __str__(self):
-        return self.question
+                                 null=True, blank=True)
 
     class Meta:
         db_table = 'questionnaire_questionnaire'
         verbose_name = _('Questionnaire')
         verbose_name_plural = _('Questionnaires')
+
+    def __str__(self):
+        return self.question
 
 
 class QuestionnaireHelper(TimeStampedModel):

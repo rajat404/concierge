@@ -9,26 +9,26 @@ class TshirtSize(models.Model):
     """To be added via Admin Panel(or Fixture), prior to adding Participants"""
     size = models.CharField(max_length=30, unique=True)
 
-    def __str__(self):
-        return self.size
-
     class Meta:
         db_table = 'participant_tshirt_size'
         verbose_name = _('Tshirt Size')
         verbose_name_plural = _('Tshirt Sizes')
+
+    def __str__(self):
+        return self.size
 
 
 class ParticipantType(models.Model):
     """To be added via Admin Panel(or Fixture), prior to adding Participants"""
     kind = models.CharField(max_length=30, unique=True)
 
-    def __str__(self):
-        return self.kind
-
     class Meta:
         db_table = 'participant_type'
         verbose_name = _('Participant Type')
         verbose_name_plural = _('Participant Types')
+
+    def __str__(self):
+        return self.kind
 
 
 class Participant(TimeStampedModel):

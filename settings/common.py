@@ -40,6 +40,7 @@ DJANGO_INIT_APPS = (
 
 THIRD_PARTY_APPS = (
     'waffle',
+    'import_export',
 )
 
 CUSTOM_APPS = (

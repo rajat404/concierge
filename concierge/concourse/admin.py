@@ -1,16 +1,17 @@
 from django.contrib import admin
 
 from . import models
+from ..base.admin import CommonAdmin
 
 
-class OrganisationAdmin(admin.ModelAdmin):
+class OrganisationAdmin(CommonAdmin):
 
     list_display = ('id', 'created', 'modified', 'name', 'slug', 'kind')
     list_filter = ('created', 'modified')
     search_fields = ('name', 'slug')
 
 
-class SpeakerAdmin(admin.ModelAdmin):
+class SpeakerAdmin(CommonAdmin):
 
     list_display = (
         'id',
@@ -24,7 +25,7 @@ class SpeakerAdmin(admin.ModelAdmin):
     list_filter = ('created', 'modified')
 
 
-class ConcourseAdmin(admin.ModelAdmin):
+class ConcourseAdmin(CommonAdmin):
 
     list_display = (
         'id',
@@ -40,13 +41,13 @@ class ConcourseAdmin(admin.ModelAdmin):
     search_fields = ('name', 'slug')
 
 
-class SponsorCategoryAdmin(admin.ModelAdmin):
+class SponsorCategoryAdmin(CommonAdmin):
 
     list_display = ('id', 'name')
     search_fields = ('name',)
 
 
-class SponsorAdmin(admin.ModelAdmin):
+class SponsorAdmin(CommonAdmin):
 
     list_display = (
         'id',
