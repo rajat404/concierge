@@ -31,6 +31,7 @@ DJANGO_INIT_APPS = (
     # 'django.contrib.humanize',  # Useful template tags
 
     'rest_framework',  # http://www.django-rest-framework.org/
+    'rest_framework.authtoken',
     'rest_framework_swagger',
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 
@@ -113,11 +114,15 @@ REST_FRAMEWORK = {
     },
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
 
         # Mainly used for api debug.
         'rest_framework.authentication.SessionAuthentication',
     ),
     'EXCEPTION_HANDLER': 'concierge.base.exceptions.exception_handler',
+    'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework_filters.backends.DjangoFilterBackend',
+    ),
 }
 # DJANGO_SITES
 # ------------------------------------------------------------------------------

@@ -23,10 +23,10 @@ class Organisation(TimeStampedSlugModel):
 
 
 class Speaker(TimeStampedModel):
-    first_name = models.CharField(_('First Name'), max_length=120, blank=True)
-    last_name = models.CharField(_('Last Name'), max_length=120, blank=True)
-    email = models.EmailField(_('email address'), unique=True, db_index=True)
-    about = models.TextField(max_length=10000)
+    first_name = models.CharField(max_length=120)
+    last_name = models.CharField(max_length=120)
+    email = models.EmailField(unique=True, db_index=True)
+    about = models.TextField(blank=True)
 
     def __str__(self):
         return self.email

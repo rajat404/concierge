@@ -1,34 +1,34 @@
 [
   {
-    "model": "registration.participanttype",
+    "model": "participant.participanttype",
     "pk": 1,
     "fields": {
       "kind": "PARTICIPANT"
     }
   },
   {
-    "model": "registration.participanttype",
+    "model": "participant.participanttype",
     "pk": 2,
     "fields": {
       "kind": "SPEAKER"
     }
   },
   {
-    "model": "registration.participanttype",
+    "model": "participant.participanttype",
     "pk": 3,
     "fields": {
       "kind": "VOLUNTEER"
     }
   },
   {
-    "model": "registration.participanttype",
+    "model": "participant.participanttype",
     "pk": 4,
     "fields": {
       "kind": "ORGANISER"
     }
   },
   {
-    "model": "registration.participanttype",
+    "model": "participant.participanttype",
     "pk": 5,
     "fields": {
       "kind": "SPONSOR"

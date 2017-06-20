@@ -37,7 +37,8 @@ class QuestionnaireHelper(TimeStampedModel):
     """Abstract model to use `Questionnaire` in your app
 
     After inheriting `QuestionnaireHelper` in your model,
-    add a separate field for `User` or `Participant`
+    add a separate field for `User` or `Participant`, in order to maintain
+    a relationship b/w the Questionnaire and those who attempted it
     """
     questionnaire = models.ForeignKey(Questionnaire)
     # User/Participant's response to the question

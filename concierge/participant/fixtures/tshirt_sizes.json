@@ -1,41 +1,41 @@
 [
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 1,
     "fields": {
       "size": "S"
     }
   },
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 2,
     "fields": {
       "size": "M"
     }
   },
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 3,
     "fields": {
       "size": "L"
     }
   },
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 4,
     "fields": {
       "size": "XL"
     }
   },
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 5,
     "fields": {
       "size": "XXL"
     }
   },
   {
-    "model": "registration.tshirtsize",
+    "model": "participant.tshirtsize",
     "pk": 6,
     "fields": {
       "size": "XXXL"

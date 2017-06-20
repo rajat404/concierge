@@ -2,9 +2,12 @@
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.authtoken.models import Token
 
 from concierge.base.models import UUIDModel
 
@@ -75,3 +78,9 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
         """Returns the short name for the user.
         """
         return self.first_name.strip()
+
+
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
