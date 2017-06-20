@@ -1,6 +1,5 @@
-from decorator import decorator as deco
-
 import waffle
+from decorator import decorator as deco
 
 
 def waffle_check(switch_name):

@@ -12,7 +12,6 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-# concierge Stuff
 from concierge.base import views as base_views
 
 from . import routers, schemas

@@ -1,7 +1,8 @@
-from concierge.base.models import TimeStampedModel
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from concierge.base.models import TimeStampedModel
 
 
 class Questionnaire(TimeStampedModel):

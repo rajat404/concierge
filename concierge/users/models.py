@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from concierge.base.models import UUIDModel
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
                                         PermissionsMixin)
 from django.db import models
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+
+from concierge.base.models import UUIDModel
 
 
 class UserManager(BaseUserManager):

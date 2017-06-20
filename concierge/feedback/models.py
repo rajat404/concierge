@@ -1,7 +1,8 @@
-from concierge.questionnaire.models import QuestionnaireHelper
-from concierge.registration.models import Participant
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from concierge.questionnaire.models import QuestionnaireHelper
+from concierge.registration.models import Participant
 
 
 class Feedback(QuestionnaireHelper):

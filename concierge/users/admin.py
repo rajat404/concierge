@@ -4,7 +4,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm
-from django.contrib.auth.forms import UserCreationForm as DjangoUserCreationForm
+from django.contrib.auth.forms import \
+    UserCreationForm as DjangoUserCreationForm
 
 from .models import User
 

@@ -1,8 +1,9 @@
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 from concierge.base.models import TimeStampedModel
 from concierge.concourse.models import Concourse
 from concierge.users.models import User
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 
 class TshirtSize(models.Model):
