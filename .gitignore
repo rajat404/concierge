@@ -136,3 +136,4 @@ ENV/
 
 # Remove before initial release
 migrations/
+fixtures/

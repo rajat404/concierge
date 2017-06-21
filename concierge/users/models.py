@@ -9,8 +9,6 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken.models import Token
 
-from concierge.base.models import UUIDModel
-
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -33,7 +31,7 @@ class UserManager(BaseUserManager):
 
 
 @python_2_unicode_compatible
-class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),

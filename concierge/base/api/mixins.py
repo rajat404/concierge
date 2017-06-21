@@ -1,4 +1,5 @@
 class MultiSerializerViewSetMixin(object):
+
     def get_serializer_class(self):
         """
         Look for serializer class in self.serializer_action_classes, which

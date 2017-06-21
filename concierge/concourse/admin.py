@@ -37,7 +37,7 @@ class ConcourseAdmin(CommonAdmin):
         'event',
         'speaker',
     )
-    list_filter = ('created', 'modified', 'event', 'speaker')
+    list_filter = ('created', 'modified')
     search_fields = ('name', 'slug')
 
 

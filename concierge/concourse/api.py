@@ -1,17 +1,12 @@
-from rest_framework.mixins import (CreateModelMixin, ListModelMixin,
-                                   RetrieveModelMixin, UpdateModelMixin)
-from rest_framework.viewsets import GenericViewSet
-
 from . import models, serializers
+from ..base.api.viewsets import CURLViewSet
 
 
-class SpeakerViewset(ListModelMixin, CreateModelMixin, RetrieveModelMixin,
-                     UpdateModelMixin, GenericViewSet):
+class SpeakerViewset(CURLViewSet):
     queryset = models.Speaker.objects.all()
     serializer_class = serializers.SpeakerSerializer
 
 
-class ConcourseViewset(ListModelMixin, CreateModelMixin, RetrieveModelMixin,
-                       UpdateModelMixin, GenericViewSet):
+class ConcourseViewset(CURLViewSet):
     queryset = models.Concourse.objects.all()
     serializer_class = serializers.ConcourseSerializer

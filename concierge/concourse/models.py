@@ -29,7 +29,7 @@ class Speaker(TimeStampedModel):
     about = models.TextField(blank=True)
 
     def __str__(self):
-        return self.email
+        return '{} {}'.format(self.first_name, self.last_name)
 
     class Meta:
         db_table = 'concourse_speaker'
@@ -51,8 +51,8 @@ class Concourse(TimeStampedSlugModel):
     )
 
     kind = models.CharField(max_length=15, choices=CONCOURSE_TYPE)
-    event = models.ForeignKey("self", blank=True, null=True)
-    speaker = models.ForeignKey(Speaker, null=True, blank=True, related_name='concourses')
+    event = models.ForeignKey("self", blank=True, null=True, to_field='slug')
+    speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
 
     class Meta:
@@ -78,9 +78,9 @@ class SponsorCategory(models.Model):
 
 
 class Sponsor(TimeStampedModel):
-    concourse = models.ForeignKey(Concourse)
-    organisation = models.ForeignKey(Organisation, null=True, blank=True)
-    category = models.ForeignKey(SponsorCategory)
+    concourse = models.ForeignKey(Concourse, to_field='slug')
+    organisation = models.ForeignKey(Organisation, to_field='slug', null=True, blank=True)
+    category = models.ForeignKey(SponsorCategory, to_field='name')
 
     class Meta:
         db_table = 'concourse_sponsor'

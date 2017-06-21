@@ -2,7 +2,7 @@ from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from concierge.base.models import TimeStampedModel
+from ..base.models import TimeStampedModel
 
 
 class Questionnaire(TimeStampedModel):
@@ -18,7 +18,7 @@ class Questionnaire(TimeStampedModel):
     # description = models.TextField(blank=True)
     kind = models.CharField(max_length=15, choices=RESPONSE_TYPES)
     label = models.CharField(max_length=50, blank=True)  # Short description for devs
-    required = models.BooleanField(default=False)  # Is this field mandatory?
+    required = models.BooleanField(default=False, help_text='is the question mandatory to attempt')
     choices = JSONField(null=True)
     # Array field to support selection of multiple choices
     correct_choices = ArrayField(models.CharField(max_length=100, blank=True),

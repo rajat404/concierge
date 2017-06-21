@@ -34,7 +34,7 @@ class ParticipantType(models.Model):
 
 class Participant(TimeStampedModel):
     user = models.ForeignKey(User)
-    concourse = models.ForeignKey(Concourse)
+    concourse = models.ForeignKey(Concourse, to_field='slug')
     kind = models.ForeignKey(ParticipantType, to_field='kind', null=True, blank=True)
     tshirt_size = models.ForeignKey(TshirtSize, to_field='size', null=True, blank=True)
 
