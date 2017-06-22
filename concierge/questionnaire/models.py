@@ -2,10 +2,10 @@ from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from ..base.models import TimeStampedModel
+from concierge.base.models import UUIDModel, TimeStampedModel
 
 
-class Questionnaire(TimeStampedModel):
+class Questionnaire(TimeStampedModel, UUIDModel):
     RESPONSE_TYPES = (
         ('MCQ', 'MCQ'),
         ('PARAGRAPH', 'PARAGRAPH'),
@@ -33,7 +33,7 @@ class Questionnaire(TimeStampedModel):
         return self.question
 
 
-class QuestionnaireHelper(TimeStampedModel):
+class QuestionnaireHelper(TimeStampedModel, UUIDModel):
     """Abstract model to use `Questionnaire` in your app
 
     After inheriting `QuestionnaireHelper` in your model,

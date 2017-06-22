@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from concierge.base.models import TimeStampedModel
+from concierge.base.models import TimeStampedModel, UUIDModel
 from concierge.concourse.models import Concourse
 from concierge.users.models import User
 
@@ -32,7 +32,7 @@ class ParticipantType(models.Model):
         return self.kind
 
 
-class Participant(TimeStampedModel):
+class Participant(TimeStampedModel, UUIDModel):
     user = models.ForeignKey(User)
     concourse = models.ForeignKey(Concourse, to_field='slug')
     kind = models.ForeignKey(ParticipantType, to_field='kind', null=True, blank=True)

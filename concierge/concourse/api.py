@@ -1,12 +1,12 @@
 from . import models, serializers
-from ..base.api.viewsets import CURLViewSet
+from ..base.api.mixins import CURLMixin
 
 
-class SpeakerViewset(CURLViewSet):
-    queryset = models.Speaker.objects.all()
+class SpeakerViewset(CURLMixin):
+    queryset = models.Speaker.objects.order_by('id')
     serializer_class = serializers.SpeakerSerializer
 
 
-class ConcourseViewset(CURLViewSet):
-    queryset = models.Concourse.objects.all()
+class ConcourseViewset(CURLMixin):
+    queryset = models.Concourse.objects.order_by('id')
     serializer_class = serializers.ConcourseSerializer

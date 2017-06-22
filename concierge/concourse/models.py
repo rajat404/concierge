@@ -54,6 +54,7 @@ class Concourse(TimeStampedSlugModel):
     event = models.ForeignKey("self", blank=True, null=True, to_field='slug')
     speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
+    description = models.TextField(blank=True)
 
     class Meta:
         db_table = 'concourse_concourse'
