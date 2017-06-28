@@ -1,7 +1,7 @@
 from . import models, serializers
-from ..base.api.mixins import CURLMixin
+from ..base.api.viewsets import CURLViewSet
 
 
-class ParticipantViewset(CURLMixin):
+class ParticipantViewset(CURLViewSet):
     queryset = models.Participant.objects.order_by('id')
     serializer_class = serializers.ParticipantSerializer

@@ -1,22 +1,21 @@
 from django.contrib import admin
 
 from . import models
-from ..base.admin import CommonAdmin
+from ..base.admin import HistoryExportAdmin
 
 
-class FeedbackAdmin(CommonAdmin):
+class FeedbackAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',
         'created',
         'modified',
-        'questionnaire',
+        'question',
         'text_response',
-        'file_response',
         'choice_response',
         'participant',
     )
-    list_filter = ('created', 'modified', 'questionnaire', 'participant')
+    list_filter = ('created', 'modified', 'question', 'participant')
 
 
 def _register(model, admin_class):

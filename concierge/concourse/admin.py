@@ -1,17 +1,17 @@
 from django.contrib import admin
 
 from . import models
-from ..base.admin import CommonAdmin
+from ..base.admin import ExportAdmin, HistoryExportAdmin
 
 
-class OrganisationAdmin(CommonAdmin):
+class OrganisationAdmin(HistoryExportAdmin):
 
     list_display = ('id', 'created', 'modified', 'name', 'slug', 'kind')
     list_filter = ('created', 'modified')
     search_fields = ('name', 'slug')
 
 
-class SpeakerAdmin(CommonAdmin):
+class SpeakerAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',
@@ -25,7 +25,7 @@ class SpeakerAdmin(CommonAdmin):
     list_filter = ('created', 'modified')
 
 
-class ConcourseAdmin(CommonAdmin):
+class ConcourseAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',
@@ -41,13 +41,13 @@ class ConcourseAdmin(CommonAdmin):
     search_fields = ('name', 'slug')
 
 
-class SponsorCategoryAdmin(CommonAdmin):
+class SponsorCategoryAdmin(ExportAdmin):
 
     list_display = ('id', 'name')
     search_fields = ('name',)
 
 
-class SponsorAdmin(CommonAdmin):
+class SponsorAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',

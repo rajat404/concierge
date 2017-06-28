@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from simple_history.models import HistoricalRecords
 
 from concierge.base.models import TimeStampedModel, UUIDModel
 from concierge.concourse.models import Concourse
@@ -37,6 +38,7 @@ class Participant(TimeStampedModel, UUIDModel):
     concourse = models.ForeignKey(Concourse, to_field='slug')
     kind = models.ForeignKey(ParticipantType, to_field='kind', null=True, blank=True)
     tshirt_size = models.ForeignKey(TshirtSize, to_field='size', null=True, blank=True)
+    history = HistoricalRecords(table_name='participant_participant_history')
 
     class Meta:
         db_table = 'participant_participant'

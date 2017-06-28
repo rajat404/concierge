@@ -1,26 +1,40 @@
 from django.contrib import admin
 
 from . import models
-from ..base.admin import CommonAdmin
+from ..base.admin import HistoryExportAdmin
 
 
-class RegistrationAdmin(CommonAdmin):
+class RegistrationAnswerAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',
         'created',
         'modified',
+        'question',
+        'text_answer',
+        'choice_answer',
+        'is_attempted',
         'participant',
-        'questionnaire',
-        'text_response',
-        'file_response',
-        'choice_response',
     )
-    list_filter = ('created', 'modified', 'participant', 'questionnaire')
+    list_filter = (
+        'created',
+        'modified',
+        'question',
+        'is_attempted',
+        'participant',
+    )
+
+
+class RegistrationQuizAdmin(HistoryExportAdmin):
+
+    list_display = ('id', 'created', 'modified', 'quiz', 'participant')
+    list_filter = ('created', 'modified', 'quiz', 'participant')
+    raw_id_fields = ('answers',)
 
 
 def _register(model, admin_class):
     admin.site.register(model, admin_class)
 
 
-_register(models.Registration, RegistrationAdmin)
+_register(models.RegistrationAnswer, RegistrationAnswerAdmin)
+_register(models.RegistrationQuiz, RegistrationQuizAdmin)

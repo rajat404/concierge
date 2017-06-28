@@ -1,8 +1,13 @@
-from concierge.base.api.mixins import CURLMixin
+from concierge.base.api.viewsets import CURLViewSet
 
 from . import models, serializers
 
 
-class RegistrationViewset(CURLMixin):
-    queryset = models.Registration.objects.order_by('id')
-    serializer_class = serializers.RegistrationSerializer
+class RegistrationAnswerViewset(CURLViewSet):
+    queryset = models.RegistrationAnswer.objects.order_by('created')
+    serializer_class = serializers.RegistrationAnswerSerializer
+
+
+class RegistrationQuizViewset(CURLViewSet):
+    queryset = models.RegistrationQuiz.objects.order_by('created')
+    serializer_class = serializers.RegistrationQuizSerializer

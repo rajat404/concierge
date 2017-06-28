@@ -1,20 +1,20 @@
 from django.contrib import admin
 
 from . import models
-from ..base.admin import CommonAdmin
+from ..base.admin import ExportAdmin, HistoryExportAdmin
 
 
-class TshirtSizeAdmin(CommonAdmin):
+class TshirtSizeAdmin(ExportAdmin):
 
     list_display = ('id', 'size')
 
 
-class ParticipantTypeAdmin(CommonAdmin):
+class ParticipantTypeAdmin(ExportAdmin):
 
     list_display = ('id', 'kind')
 
 
-class ParticipantAdmin(CommonAdmin):
+class ParticipantAdmin(HistoryExportAdmin):
 
     list_display = (
         'id',

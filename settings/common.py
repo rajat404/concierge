@@ -36,22 +36,23 @@ DJANGO_INIT_APPS = (
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 
     'compressor',
-    'autoslug',
 )
 
 THIRD_PARTY_APPS = (
-    # 'waffle',
+    'autoslug',
     'import_export',
+    'simple_history',  # Middleware also added for the same
+    # 'waffle',
 )
 
 CUSTOM_APPS = (
     'concierge.base',
     'concierge.users',
     'concierge.concourse',
-    'concierge.questionnaire',
+    'concierge.quiz',
     'concierge.participant',
     'concierge.registration',
-    'concierge.feedback',
+    # 'concierge.feedback',
 )
 
 INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
@@ -147,6 +148,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 # DJANGO CORE

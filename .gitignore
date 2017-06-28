@@ -134,6 +134,9 @@ ENV/
 # Others
 .staticfiles/
 
+# Development related stuff
+dev/
+
 # Remove before initial release
 migrations/
 fixtures/

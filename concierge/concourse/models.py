@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from simple_history.models import HistoricalRecords
 
 from concierge.base.models import TimeStampedModel, TimeStampedSlugModel
 
@@ -12,6 +13,7 @@ class Organisation(TimeStampedSlugModel):
     )
 
     kind = models.CharField(max_length=15, choices=ORG_TYPE)
+    history = HistoricalRecords(table_name='organisation_organisation_history')
 
     class Meta:
         db_table = 'organisation_organisation'
@@ -27,6 +29,7 @@ class Speaker(TimeStampedModel):
     last_name = models.CharField(max_length=120)
     email = models.EmailField(unique=True, db_index=True)
     about = models.TextField(blank=True)
+    history = HistoricalRecords(table_name='concourse_speaker_history')
 
     def __str__(self):
         return '{} {}'.format(self.first_name, self.last_name)
@@ -55,6 +58,8 @@ class Concourse(TimeStampedSlugModel):
     speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
+    # Issue in migration due to self-referencing foreign key
+    # history = HistoricalRecords(table_name='concourse_concourse_history')
 
     class Meta:
         db_table = 'concourse_concourse'
@@ -82,6 +87,7 @@ class Sponsor(TimeStampedModel):
     concourse = models.ForeignKey(Concourse, to_field='slug')
     organisation = models.ForeignKey(Organisation, to_field='slug', null=True, blank=True)
     category = models.ForeignKey(SponsorCategory, to_field='name')
+    history = HistoricalRecords(table_name='concourse_sponsor_history')
 
     class Meta:
         db_table = 'concourse_sponsor'
