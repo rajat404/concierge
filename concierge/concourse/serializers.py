@@ -16,4 +16,4 @@ class ConcourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Concourse
-        fields = '__all__'
+        exclude = ('feedback_quiz', 'registration_quiz',)

@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 from concierge.base.models import TimeStampedUUIDModel
-from concierge.concourse.models import Concourse
 
 
 class Question(TimeStampedUUIDModel):
@@ -40,28 +39,8 @@ class Question(TimeStampedUUIDModel):
         return self.text
 
 
-# class QuizType(models.Model):
-#     """To be added via Admin Panel(or Fixture), prior to adding Quizzes"""
-#     name = models.CharField(max_length=50, unique=True)
-
-#     class Meta:
-#         db_table = 'quiz_quiz_type'
-#         verbose_name = _('Quiz Type')
-#         verbose_name_plural = _('Quiz Types')
-
-#     def __str__(self):
-#         return self.name
-
-
 class Quiz(TimeStampedUUIDModel):
-    QUIZ_TYPES = (
-        ('REGISTRATION', 'REGISTRATION'),
-        ('FEEDBACK', 'FEEDBACK'),
-    )
     label = models.CharField(max_length=100, unique=True)
-    # kind = models.ForeignKey(QuizType, to_field='name')
-    kind = models.CharField(max_length=50, choices=QUIZ_TYPES)
-    concourse = models.ForeignKey(Concourse)
     questions = models.ManyToManyField(Question, blank=True, related_name='quizzes')
 
     class Meta:

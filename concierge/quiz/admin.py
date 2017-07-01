@@ -27,10 +27,8 @@ class QuizAdmin(HistoryExportAdmin):
         'created',
         'modified',
         'label',
-        'kind',
-        'concourse',
     )
-    list_filter = ('created', 'modified', 'concourse')
+    list_filter = ('created', 'modified',)
     raw_id_fields = ('questions',)
 
 

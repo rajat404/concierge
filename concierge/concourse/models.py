@@ -1,8 +1,11 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 from concierge.base.models import TimeStampedModel, TimeStampedSlugModel
+from concierge.quiz.models import Quiz
 
 
 class Organisation(TimeStampedSlugModel):
@@ -61,6 +64,10 @@ class Concourse(TimeStampedSlugModel):
     # Issue in migration due to self-referencing foreign key
     # history = HistoricalRecords(table_name='concourse_concourse_history')
 
+    # Need to be nullable temporarily, as the value will be populated in the post_save method
+    registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True)
+    feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True)
+
     class Meta:
         db_table = 'concourse_concourse'
         verbose_name = _('Concourse')
@@ -68,6 +75,27 @@ class Concourse(TimeStampedSlugModel):
 
     def __str__(self):
         return self.slug
+
+
+def _create_quiz(slug, model_name):
+    """Returns a Quiz object with the label
+    of the specified FK and Concourse's Slug
+    """
+    label = '{}-{}'.format(model_name, slug)
+    quiz_obj, _ = Quiz.objects.get_or_create(label=label)
+    return quiz_obj
+
+
+@receiver(post_save, sender=Concourse)
+def populate_concourse_fk(sender, instance=None, created=False, **kwargs):
+    """Sets foreign key relation to Quiz objects, with the appropriate label,
+    for the newly created Concourse objects
+    """
+    if created:
+        _slug = instance.slug
+        instance.registration_quiz = _create_quiz(_slug, 'registration')
+        instance.feedback_quiz = _create_quiz(_slug, 'feedback')
+        instance.save()
 
 
 class SponsorCategory(models.Model):
