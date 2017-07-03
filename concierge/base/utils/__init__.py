@@ -6,7 +6,7 @@ from .. import exceptions as exc
 
 def get_object(app_name, model_name, **kwargs):
     """
-    Takes the name of the App, Model, and Filter kwargs
+    Returns a model object if it exists, else None
     """
     model_cls = apps.get_model(app_name, model_name)
     try:
@@ -15,9 +15,9 @@ def get_object(app_name, model_name, **kwargs):
         return None
 
 
-def get_qs(app_name, model_name, **kwargs):
+def get_manager(app_name, model_name):
     """
-    Takes the name of the App, Model, and Filter kwargs
+    Returns the queryset manager of the specified model
     """
     model_cls = apps.get_model(app_name, model_name)
     try:
@@ -26,9 +26,9 @@ def get_qs(app_name, model_name, **kwargs):
         return None
 
 
-def create_instance(serializer, payload):
+def create_instance(serializer):
     """
-    Takes a serializer & it's payload as args, and creates an instance
+    Takes a serializer and creates an instance
 
     If the serializer returns an object on successful creation/updation,
     then object is returned, else None
@@ -36,12 +36,11 @@ def create_instance(serializer, payload):
     If an error occurs, then `BadRequest` exception is raised,
     with serializer errors
     """
-    serializer_instance = serializer(data=payload)
-    if serializer_instance.is_valid():
-        obj = serializer_instance.save()
+    if serializer.is_valid():
+        obj = serializer.save()
         if obj:
             return obj
         else:
             return None
     else:
-        raise exc.BadRequest(dict(serializer_instance.errors))
+        raise exc.BadRequest(dict(serializer.errors))

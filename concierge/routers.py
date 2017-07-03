@@ -18,9 +18,9 @@ router.register(r'concourse', concourse_api.ConcourseViewset, base_name='concour
 # Participant
 router.register(r'participant', participant_api.ParticipantViewset, base_name='participant')
 
-# # Quiz
-# router.register(r'question', quiz_api.QuestionViewset, base_name='question')
-# router.register(r'quiz', quiz_api.QuizViewset, base_name='quiz')
+# Quiz
+router.register(r'question', quiz_api.QuestionViewset, base_name='question')
+router.register(r'quiz', quiz_api.QuizViewset, base_name='quiz')
 
 # # Registration
 # router.register(r'registration', registration_api.RegistrationAnswerViewset, base_name='registration')

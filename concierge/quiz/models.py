@@ -18,9 +18,10 @@ class Question(TimeStampedUUIDModel):
     CHOICE_TYPES = (
         ('TEXT', 'TEXT'),
         ('URL', 'URL'),
+        ('OTHER', 'OTHER'),
     )
 
-    text = models.TextField(blank=False)
+    text = models.TextField(blank=False, unique=True)
     kind = models.CharField(max_length=15, choices=ANSWER_TYPES)
     # description = models.CharField(max_length=50, blank=True)
     required = models.BooleanField(blank=False, help_text='is the question mandatory to attempt')
@@ -48,9 +49,12 @@ class Quiz(TimeStampedUUIDModel):
         verbose_name = _('Quiz')
         verbose_name_plural = _('Quizzes')
 
+    def __str__(self):
+        return self.label
+
 
 class AnswerHelper(TimeStampedUUIDModel):
-    question = models.ForeignKey(Question)
+    question = models.ForeignKey(Question, related_name='answers')
     text_answer = models.TextField(blank=True)
     choice_answer = ArrayField(models.CharField(max_length=100, blank=True), null=True, blank=True)
     is_attempted = models.BooleanField(default=False)
