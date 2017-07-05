@@ -1,7 +1,8 @@
 from django.contrib import admin
 
+from concierge.base.admin import HistoryExportAdmin
+
 from . import models
-from ..base.admin import HistoryExportAdmin
 
 
 class HistoricalAnswerAdmin(HistoryExportAdmin):

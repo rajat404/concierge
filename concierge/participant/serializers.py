@@ -10,4 +10,4 @@ class ParticipantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Participant
-        fields = ('id', 'user', 'concourse', 'kind', 'tshirt_size',)
+        fields = ('id', 'user', 'concourse', 'kind', 'tshirt_size', 'created', 'modified',)

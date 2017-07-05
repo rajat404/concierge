@@ -1,4 +1,5 @@
-from ..base.api.viewsets import CURLViewSet
+from concierge.base.api.viewsets import CURLViewSet
+
 from .models import Concourse, Speaker
 from .serializers import ConcourseSerializer, SpeakerSerializer
 

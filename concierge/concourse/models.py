@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 from concierge.base.models import (TimeStampedModel, TimeStampedSlugModel,
-                                   TimeStampedUUIDModel)
+                                   TimeStampedUUIDModel, UUIDModel)
 from concierge.quiz.models import Quiz
 
 
@@ -44,7 +44,7 @@ class Speaker(TimeStampedUUIDModel):
         verbose_name_plural = _('Speakers')
 
 
-class Concourse(TimeStampedSlugModel):
+class Concourse(TimeStampedSlugModel, UUIDModel):
     CONCOURSE_TYPE = (
         ('EVENT', 'EVENT'),
         ('SESSION', 'SESSION'),

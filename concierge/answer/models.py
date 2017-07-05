@@ -7,7 +7,9 @@ from concierge.quiz.models import AnswerHelper
 
 
 class Answer(AnswerHelper):
-    """`AnswerHelper adds the fields - question, text_answer, choice_answer"""
+    """`AnswerHelper adds the fields - id(UUID), question, text_answer,
+    choice_answer, created, modified
+    """
     participant = models.ForeignKey(Participant, related_name='answers')
     history = HistoricalRecords(table_name='answer_history')
 
@@ -16,17 +18,3 @@ class Answer(AnswerHelper):
         db_table = 'quiz_answer'
         verbose_name = _('Answer')
         verbose_name_plural = _('Answers')
-
-
-
-# class QuizAnswer(TimeStampedUUIDModel):
-#     """Log of all answers for a quiz by a participant"""
-#     quiz = models.ForeignKey(Quiz)
-#     answers = models.ManyToManyField(Answer, related_name='quiz_answers')
-#     participant = models.ForeignKey(Participant, related_name='quiz_answers')
-#     history = HistoricalRecords(table_name='quiz_answer_history')
-
-#     class Meta:
-#         db_table = 'quiz_quiz_answer'
-#         verbose_name = _('Quiz Answer')
-#         verbose_name_plural = _('Quiz Answers')

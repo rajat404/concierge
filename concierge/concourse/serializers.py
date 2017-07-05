@@ -9,7 +9,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Speaker
-        fields = ('id', 'first_name', 'last_name', 'email', 'about',)
+        fields = ('id', 'first_name', 'last_name', 'email', 'about', 'created', 'modified',)
 
 
 class ConcourseSerializer(serializers.ModelSerializer):
@@ -17,4 +17,4 @@ class ConcourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Concourse
-        fields = ('id', 'kind', 'event', 'speaker', 'venue', 'description',)
+        fields = ('id', 'name', 'slug', 'kind', 'event', 'speaker', 'venue', 'description', 'created', 'modified',)

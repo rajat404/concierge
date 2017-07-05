@@ -10,7 +10,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Answer
-        fields = ('id', 'question', 'text_answer', 'choice_answer', 'participant',)
+        fields = ('id', 'question', 'text_answer', 'choice_answer', 'participant', 'created', 'modified',)
 
     def validate(self, data):
         data = super().validate(data)

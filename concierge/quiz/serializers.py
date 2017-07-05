@@ -14,7 +14,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('id', 'text', 'kind', 'required', 'editable', 'choices', 'quizzes',)
+        fields = ('id', 'text', 'kind', 'required', 'editable', 'choices', 'quizzes', 'created', 'modified',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -64,7 +64,7 @@ class QuizSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        fields = ('id', 'label', 'questions',)
+        fields = ('id', 'label', 'questions', 'created', 'modified',)
 
 
 class QuizWriteSerializer(serializers.ModelSerializer):
@@ -80,7 +80,7 @@ class QuizWriteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        fields = ('id', 'label', 'questions',)
+        fields = ('id', 'label', 'questions', 'created', 'modified',)
 
     def to_representation(self, obj):
         _label = obj.get('label')

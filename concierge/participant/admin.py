@@ -1,7 +1,8 @@
 from django.contrib import admin
 
+from concierge.base.admin import ExportAdmin, HistoryExportAdmin
+
 from . import models
-from ..base.admin import ExportAdmin, HistoryExportAdmin
 
 
 class TshirtSizeAdmin(ExportAdmin):

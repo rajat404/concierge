@@ -20,6 +20,7 @@ router.register(r'participant', participant_api.ParticipantViewset, base_name='p
 # Quiz
 router.register(r'question', quiz_api.QuestionViewset, base_name='question')
 router.register(r'quiz', quiz_api.QuizViewset, base_name='quiz')
+router.register(r'quizupload', quiz_api.QuizUploadViewset, base_name='quizupload')
 
 # Answer
 router.register(r'answer', answer_api.AnswerViewset, base_name='answer')
