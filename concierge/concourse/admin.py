@@ -25,7 +25,7 @@ class SpeakerAdmin(HistoryExportAdmin):
     list_filter = ('created', 'modified')
 
 
-class ConcourseAdmin(HistoryExportAdmin):
+class ConcourseAdmin(ExportAdmin):
 
     list_display = (
         'id',

@@ -4,7 +4,8 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
-from concierge.base.models import TimeStampedModel, TimeStampedSlugModel
+from concierge.base.models import (TimeStampedModel, TimeStampedSlugModel,
+                                   TimeStampedUUIDModel)
 from concierge.quiz.models import Quiz
 
 
@@ -27,7 +28,7 @@ class Organisation(TimeStampedSlugModel):
         return self.slug
 
 
-class Speaker(TimeStampedModel):
+class Speaker(TimeStampedUUIDModel):
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
     email = models.EmailField(unique=True, db_index=True)
@@ -61,12 +62,11 @@ class Concourse(TimeStampedSlugModel):
     speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
-    # Issue in migration due to self-referencing foreign key
-    # history = HistoricalRecords(table_name='concourse_concourse_history')
-
     # Need to be nullable temporarily, as the value will be populated in the post_save method
     registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True)
     feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True)
+    # Issue in migration due to self-referencing foreign key
+    # history = HistoricalRecords(table_name='concourse_concourse_history')
 
     class Meta:
         db_table = 'concourse_concourse'

@@ -51,8 +51,6 @@ CUSTOM_APPS = (
     'concierge.concourse',
     'concierge.quiz',
     'concierge.participant',
-    # 'concierge.registration',
-    # 'concierge.feedback',
     'concierge.answer',
 )
 
