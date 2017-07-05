@@ -57,7 +57,6 @@ class AnswerHelper(TimeStampedUUIDModel):
     question = models.ForeignKey(Question, related_name='answers')
     text_answer = models.TextField(blank=True)
     choice_answer = ArrayField(models.CharField(max_length=100, blank=True), null=True, blank=True)
-    is_attempted = models.BooleanField(default=False)
 
     class Meta:
         abstract = True

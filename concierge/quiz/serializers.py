@@ -88,6 +88,6 @@ class QuizWriteSerializer(serializers.ModelSerializer):
         return super().to_representation(quiz_obj)
 
     def validate_label(self, label):
-        if get_manager('quiz', 'Quiz', label=label).exists() is False:
+        if get_manager('quiz', 'Quiz').filter(label=label).exists() is False:
             raise serializers.ValidationError('Quiz does not exist.')
         return label

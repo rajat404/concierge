@@ -1,4 +1,3 @@
-from concierge.base import exceptions as exc
 from concierge.base.utils import create_instance, get_object
 
 from .serializers import QuestionSerializer
@@ -16,15 +15,13 @@ def create_question(serializer):
 
 
 def create_quiz(serializer):
-    if serializer.is_valid():
-        _label = serializer.validated_data.get('label')
-        _questions = serializer.validated_data.get('questions')
-        quiz_obj = get_object('quiz', 'Quiz', label=_label)
-        for question in _questions:
-            question_serializer = QuestionSerializer(data=question)
-            question_obj = create_instance(serializer=question_serializer)
-            if question_obj:
-                quiz_obj.questions.add(question_obj)
-        return quiz_obj
-    else:
-        raise exc.BadRequest(dict(serializer.errors))
+    serializer.is_valid(raise_exception=True)
+    _label = serializer.validated_data.get('label')
+    _questions = serializer.validated_data.get('questions')
+    quiz_obj = get_object('quiz', 'Quiz', label=_label)
+    for question in _questions:
+        question_serializer = QuestionSerializer(data=question)
+        question_obj = create_instance(serializer=question_serializer)
+        if question_obj:
+            quiz_obj.questions.add(question_obj)
+    return quiz_obj

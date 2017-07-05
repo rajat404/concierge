@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.apps import apps
 
-from .. import exceptions as exc
-
 
 def get_object(app_name, model_name, **kwargs):
     """
@@ -36,11 +34,9 @@ def create_instance(serializer):
     If an error occurs, then `BadRequest` exception is raised,
     with serializer errors
     """
-    if serializer.is_valid():
-        obj = serializer.save()
-        if obj:
-            return obj
-        else:
-            return None
+    serializer.is_valid(raise_exception=True)
+    obj = serializer.save()
+    if obj:
+        return obj
     else:
-        raise exc.BadRequest(dict(serializer.errors))
+        return None

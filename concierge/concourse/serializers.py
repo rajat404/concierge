@@ -6,9 +6,10 @@ from .models import Concourse, Speaker
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Speaker
-        exclude = ('email',)
+        fields = ('id', 'first_name', 'last_name', 'email', 'about',)
 
 
 class ConcourseSerializer(serializers.ModelSerializer):
@@ -16,4 +17,4 @@ class ConcourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Concourse
-        exclude = ('feedback_quiz', 'registration_quiz',)
+        fields = ('id', 'kind', 'event', 'speaker', 'venue', 'description',)

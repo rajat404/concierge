@@ -1,12 +1,13 @@
-from . import models, serializers
 from ..base.api.viewsets import CURLViewSet
+from .models import Concourse, Speaker
+from .serializers import ConcourseSerializer, SpeakerSerializer
 
 
 class SpeakerViewset(CURLViewSet):
-    queryset = models.Speaker.objects.order_by('id')
-    serializer_class = serializers.SpeakerSerializer
+    queryset = Speaker.objects.order_by('id')
+    serializer_class = SpeakerSerializer
 
 
 class ConcourseViewset(CURLViewSet):
-    queryset = models.Concourse.objects.order_by('id')
-    serializer_class = serializers.ConcourseSerializer
+    queryset = Concourse.objects.order_by('id')
+    serializer_class = ConcourseSerializer

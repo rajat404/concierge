@@ -7,13 +7,16 @@ from concierge.quiz.models import AnswerHelper
 
 
 class Answer(AnswerHelper):
+    """`AnswerHelper adds the fields - question, text_answer, choice_answer"""
     participant = models.ForeignKey(Participant, related_name='answers')
     history = HistoricalRecords(table_name='answer_history')
 
     class Meta:
+        unique_together = ('question', 'participant')
         db_table = 'quiz_answer'
         verbose_name = _('Answer')
         verbose_name_plural = _('Answers')
+
 
 
 # class QuizAnswer(TimeStampedUUIDModel):
