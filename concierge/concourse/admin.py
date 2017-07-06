@@ -42,6 +42,21 @@ class ConcourseAdmin(ExportAdmin):
     search_fields = ('name', 'slug')
 
 
+class OfflineConcourseAdmin(HistoryExportAdmin):
+
+    list_display = (
+        'id',
+        'created',
+        'modified',
+        'concourse',
+        'longitude',
+        'latitude',
+        'address',
+        'address_guidelines',
+    )
+    list_filter = ('created', 'modified', 'concourse')
+
+
 class SponsorCategoryAdmin(ExportAdmin):
 
     list_display = ('id', 'name')
@@ -74,5 +89,6 @@ def _register(model, admin_class):
 _register(models.Organisation, OrganisationAdmin)
 _register(models.Speaker, SpeakerAdmin)
 _register(models.Concourse, ConcourseAdmin)
+_register(models.OfflineConcourse, OfflineConcourseAdmin)
 _register(models.SponsorCategory, SponsorCategoryAdmin)
 _register(models.Sponsor, SponsorAdmin)

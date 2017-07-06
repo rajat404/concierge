@@ -140,3 +140,4 @@ dev/
 # Remove before initial release
 migrations/
 fixtures/
+load_fixtures.sh

@@ -13,7 +13,7 @@ class SpeakerSerializer(serializers.ModelSerializer):
 
 
 class ConcourseSerializer(serializers.ModelSerializer):
-    kind = DisplayChoiceField(choices=Concourse.CONCOURSE_TYPE)
+    kind = DisplayChoiceField(choices=Concourse.CONCOURSE_CHOICES)
 
     class Meta:
         model = Concourse

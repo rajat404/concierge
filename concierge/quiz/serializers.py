@@ -7,7 +7,7 @@ from .models import Question, Quiz
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    kind = DisplayChoiceField(choices=Question.ANSWER_TYPES)
+    kind = DisplayChoiceField(choices=Question.ANSWER_CHOICES)
     required = serializers.BooleanField(required=True)
     editable = serializers.BooleanField(required=True)
     quizzes = serializers.ListField(required=False, write_only=True, child=serializers.CharField())

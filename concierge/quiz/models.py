@@ -7,7 +7,7 @@ from concierge.base.models import TimeStampedUUIDModel
 
 
 class Question(TimeStampedUUIDModel):
-    ANSWER_TYPES = (
+    ANSWER_CHOICES = (
         ('MCQ', 'MCQ'),
         ('PARAGRAPH', 'PARAGRAPH'),
         # ('FILE', 'FILE'),
@@ -22,7 +22,7 @@ class Question(TimeStampedUUIDModel):
     )
 
     text = models.TextField(blank=False, unique=True)
-    kind = models.CharField(max_length=15, choices=ANSWER_TYPES)
+    kind = models.CharField(max_length=15, choices=ANSWER_CHOICES)
     # description = models.CharField(max_length=50, blank=True)
     required = models.BooleanField(blank=False, help_text='is the question mandatory to attempt')
     editable = models.BooleanField(blank=False, help_text='can the answer be changed later')
