@@ -23,7 +23,7 @@ def create_concourse(serializer):
     if concourse_obj.is_offline:
         OfflineConcourse.objects.get_or_create(concourse=concourse_obj)
 
-    # Sets foreign key relation to Quiz objects,
+    # Sets foreign key relation to `Quiz` objects,
     # with the appropriate label,
     # for the newly created Concourse objects
     _slug = concourse_obj.slug
