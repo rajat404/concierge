@@ -31,5 +31,5 @@ class AnswerSerializer(serializers.ModelSerializer):
         if self.instance and editable is False:
             # If `self.instance` is not None, it means the instance
             # already exists, and is being updated
-            raise serializers.ValidationError('Answer cannot be updated for this question.')
+            raise serializers.ValidationError({'question': 'Answer cannot be updated for this question.'})
         return data

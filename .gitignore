@@ -141,3 +141,5 @@ dev/
 migrations/
 fixtures/
 load_fixtures.sh
+delete_migrations.sh
+recreate_db.sh

@@ -18,7 +18,7 @@ class QuestionViewset(CURLViewSet):
     serializer_class = QuestionSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         create_question(serializer)
         return rsp.Created(serializer.data)
 
@@ -33,7 +33,7 @@ class QuizViewset(MultiSerializerViewSetMixin, CURLViewSet):
         thus Quiz's `create` method doesn't create an instance of Quiz,
         but does create instances of `Question`
         """
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         create_quiz(serializer)
         return rsp.Created(serializer.data)
 
@@ -46,6 +46,6 @@ class QuizUploadViewset(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         file_obj = request.data.get('file')
         data = json.load(file_obj)
-        serializer = self.serializer_class(data=data)
+        serializer = self.get_serializer(data=data)
         create_quiz(serializer)
         return rsp.Created(serializer.data)

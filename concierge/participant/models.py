@@ -35,7 +35,7 @@ class ParticipantType(models.Model):
 
 class Participant(TimeStampedUUIDModel):
     user = models.ForeignKey(User)
-    concourse = models.ForeignKey(Concourse, to_field='slug')
+    concourse = models.ForeignKey(Concourse)
     kind = models.ForeignKey(ParticipantType, to_field='kind', null=True, blank=True)
     tshirt_size = models.ForeignKey(TshirtSize, to_field='size', null=True, blank=True)
     history = HistoricalRecords(table_name='participant_participant_history')

@@ -1,11 +1,10 @@
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
-from concierge.base.models import (TimeStampedModel, TimeStampedSlugModel,
-                                   TimeStampedUUIDModel, UUIDModel)
+from concierge.base.models import (TimeStampedModel, TimeStampedSlugUUIDModel,
+                                   TimeStampedUUIDModel)
 from concierge.quiz.models import Quiz
 
 
@@ -25,7 +24,7 @@ class Speaker(TimeStampedUUIDModel):
         verbose_name_plural = _('Speakers')
 
 
-class Concourse(TimeStampedSlugModel, UUIDModel):
+class Concourse(TimeStampedSlugUUIDModel):
     CONCOURSE_CHOICES = (
         ('EVENT', 'EVENT'),
         ('SESSION', 'SESSION'),
@@ -44,18 +43,19 @@ class Concourse(TimeStampedSlugModel, UUIDModel):
     )
 
     kind = models.CharField(max_length=15, choices=CONCOURSE_CHOICES)
-    event = models.ForeignKey("self", blank=True, null=True, to_field='slug')
+    event = models.ForeignKey("self", blank=True, null=True)
     speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
     # Need to be nullable temporarily, as the value will be populated in the post_save method
     registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True, blank=True)
     feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True, blank=True)
-    # Issue in migration due to self-referencing foreign key
-    # history = HistoricalRecords(table_name='concourse_concourse_history')
+    history = HistoricalRecords(table_name='concourse_concourse_history')
     start = models.DateTimeField()
-    end = models.DateTimeField(null=True, blank=True)
+    end = models.DateTimeField()
     participation_open = models.BooleanField(default=False, help_text='can a user participate in this concourse')
+    participation_start = models.DateTimeField(null=True, blank=True)
+    participation_end = models.DateTimeField(null=True, blank=True)
     is_offline = models.BooleanField(default=True)
 
     class Meta:
@@ -66,32 +66,11 @@ class Concourse(TimeStampedSlugModel, UUIDModel):
     def __str__(self):
         return self.slug
 
-
-def _create_quiz(slug, model_name):
-    """Returns a Quiz object with the label
-    of the specified FK and Concourse's Slug
-    """
-    label = '{}-{}'.format(slug, model_name)
-    quiz_obj, _ = Quiz.objects.get_or_create(label=label)
-    return quiz_obj
-
-
-@receiver(post_save, sender=Concourse)
-def populate_concourse_fk(sender, instance=None, created=False, **kwargs):
-    """Sets foreign key relation to Quiz objects, with the appropriate label,
-    for the newly created Concourse objects
-
-    Also creates the associated OfflineConcourse object, if the said
-    concourse is offline
-    """
-    if created:
-        _slug = instance.slug
-        instance.registration_quiz = _create_quiz(_slug, 'registration')
-        instance.feedback_quiz = _create_quiz(_slug, 'feedback')
-        instance.save()
-
-        if instance.is_offline:
-            OfflineConcourse.objects.get_or_create(concourse=instance)
+    def can_participate(self):
+        if self.participation_open and (self.participation_start <= timezone.now() < self.participation_end):
+            return True
+        else:
+            return False
 
 
 class OfflineConcourse(TimeStampedUUIDModel):
@@ -111,7 +90,7 @@ class OfflineConcourse(TimeStampedUUIDModel):
         return self.concourse.slug
 
 
-class Organisation(TimeStampedSlugModel):
+class Organisation(TimeStampedSlugUUIDModel):
     ORG_CHOICES = (
         ('HOST', 'HOST'),
         ('SPONSOR', 'SPONSOR'),
@@ -144,8 +123,8 @@ class SponsorCategory(models.Model):
 
 
 class Sponsor(TimeStampedModel):
-    concourse = models.ForeignKey(Concourse, to_field='slug')
-    organisation = models.ForeignKey(Organisation, to_field='slug', null=True, blank=True)
+    concourse = models.ForeignKey(Concourse)
+    organisation = models.ForeignKey(Organisation)
     category = models.ForeignKey(SponsorCategory, to_field='name')
     history = HistoricalRecords(table_name='concourse_sponsor_history')
 

@@ -42,12 +42,19 @@ class TimeStampedSlugModel(TimeStampedModel):
         abstract = True
 
 
-class TimeStampedUUIDModel(UUIDModel):
+class TimeStampedUUIDModel(UUIDModel, TimeStampedModel):
     """An abstract base class model that provides self-updating
     ``created`` and ``modified`` fields with UUID as primary_key field.
     """
-    created = models.DateTimeField(auto_now_add=True, editable=False)
-    modified = models.DateTimeField(auto_now=True, editable=False)
+
+    class Meta:
+        abstract = True
+
+
+class TimeStampedSlugUUIDModel(UUIDModel, TimeStampedSlugModel):
+    """An abstract base class model that provides self-updating
+    ``created`` and ``modified`` fields with UUID as primary_key field.
+    """
 
     class Meta:
         abstract = True
