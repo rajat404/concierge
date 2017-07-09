@@ -7,8 +7,8 @@ from .models import OfflineConcourse
 
 
 def _create_quiz(slug, model_name):
-    """Returns a Quiz object with the label
-    of the specified FK and Concourse's Slug
+    """Returns a `Quiz` object with the label
+    of the specified foreign key and Concourse's Slug
     """
     label = '{}-{}'.format(slug, model_name)
     quiz_obj, _ = Quiz.objects.get_or_create(label=label)
@@ -40,7 +40,7 @@ def create_concourse(serializer):
         if _participation_start in ('', None):
             concourse_obj.participation_start = timezone.now()
         # If `participation_end` is not given,
-        # then it's set to current datetime
+        # then it's set to Concourse's end datetime
         if _participation_end in ('', None):
             concourse_obj.participation_end = concourse_obj.end
 

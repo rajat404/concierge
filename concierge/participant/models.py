@@ -44,3 +44,6 @@ class Participant(TimeStampedUUIDModel):
         db_table = 'participant_participant'
         verbose_name = _('Participant')
         verbose_name_plural = _('Participants')
+
+    def __str__(self):
+        return str(self.id)

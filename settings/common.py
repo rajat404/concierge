@@ -31,7 +31,6 @@ DJANGO_INIT_APPS = (
     # 'django.contrib.humanize',  # Useful template tags
 
     'rest_framework',  # http://www.django-rest-framework.org/
-    'rest_framework.authtoken',
     'rest_framework_swagger',
     'versatileimagefield',  # https://github.com/WGBH/django-versatileimagefield/
 
@@ -39,6 +38,7 @@ DJANGO_INIT_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'rest_framework.authtoken',
     'autoslug',
     'import_export',
     'simple_history',  # Middleware also added for the same

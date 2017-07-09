@@ -18,3 +18,6 @@ class Answer(AnswerHelper):
         db_table = 'quiz_answer'
         verbose_name = _('Answer')
         verbose_name_plural = _('Answers')
+
+    def __str__(self):
+        return str(self.id)

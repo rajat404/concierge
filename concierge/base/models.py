@@ -54,6 +54,8 @@ class TimeStampedUUIDModel(UUIDModel, TimeStampedModel):
 class TimeStampedSlugUUIDModel(UUIDModel, TimeStampedSlugModel):
     """An abstract base class model that provides self-updating
     ``created`` and ``modified`` fields with UUID as primary_key field.
+    It also provides a `name` field and a self-forming `slug` field,
+    based on that name
     """
 
     class Meta:

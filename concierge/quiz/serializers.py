@@ -48,16 +48,16 @@ class QuestionSerializer(serializers.ModelSerializer):
         return choices
 
     def validate(self, data):
-        data = super().validate(data)
-        kind = data.get('kind')
-        choices = data.get('choices')
+        _data = super().validate(data)
+        kind = _data.get('kind')
+        choices = _data.get('choices')
 
         if kind == 'MCQ':
             # By default, `serializers.JSONField` accepts empty dicts but if
             # `choices` is mandatory, then `choices` shouldn't be an empty dict
             if choices in ({}, None):
                 raise serializers.ValidationError({'choices': 'This field is required for MCQs'})
-        return data
+        return _data
 
 
 class QuizSerializer(serializers.ModelSerializer):

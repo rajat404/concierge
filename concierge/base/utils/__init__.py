@@ -36,7 +36,4 @@ def create_instance(serializer):
     """
     serializer.is_valid(raise_exception=True)
     obj = serializer.save()
-    if obj:
-        return obj
-    else:
-        return None
+    return obj or None

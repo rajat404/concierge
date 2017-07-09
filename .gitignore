@@ -140,6 +140,5 @@ dev/
 # Remove before initial release
 migrations/
 fixtures/
-load_fixtures.sh
-delete_migrations.sh
 recreate_db.sh
+populate_db.py

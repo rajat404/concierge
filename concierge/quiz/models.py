@@ -37,7 +37,7 @@ class Question(TimeStampedUUIDModel):
         verbose_name_plural = _('Questions')
 
     def __str__(self):
-        return self.text
+        return str(self.id)
 
 
 class Quiz(TimeStampedUUIDModel):

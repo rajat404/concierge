@@ -15,13 +15,13 @@ class Speaker(TimeStampedUUIDModel):
     about = models.TextField(blank=True)
     history = HistoricalRecords(table_name='concourse_speaker_history')
 
-    def __str__(self):
-        return '{} {}'.format(self.first_name, self.last_name)
-
     class Meta:
         db_table = 'concourse_speaker'
         verbose_name = _('Speaker')
         verbose_name_plural = _('Speakers')
+
+    def __str__(self):
+        return '{} {}'.format(self.first_name, self.last_name)
 
 
 class Concourse(TimeStampedSlugUUIDModel):
@@ -43,13 +43,13 @@ class Concourse(TimeStampedSlugUUIDModel):
     )
 
     kind = models.CharField(max_length=15, choices=CONCOURSE_CHOICES)
-    event = models.ForeignKey("self", blank=True, null=True)
+    event = models.ForeignKey('self', blank=True, null=True)
     speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
-    # Need to be nullable temporarily, as the value will be populated in the post_save method
-    registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True, blank=True)
-    feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True, blank=True)
+    # Need to be nullable, as the value will be populated after creation of the `Concourse` instance
+    registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True)
+    feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True)
     history = HistoricalRecords(table_name='concourse_concourse_history')
     start = models.DateTimeField()
     end = models.DateTimeField()
@@ -132,3 +132,6 @@ class Sponsor(TimeStampedModel):
         db_table = 'concourse_sponsor'
         verbose_name = _('Sponsor')
         verbose_name_plural = _('Sponsors')
+
+    def __str__(self):
+        return '{}--{}'.format(self.organisation, self.concourse)

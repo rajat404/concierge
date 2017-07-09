@@ -22,3 +22,11 @@ class ConcourseSerializer(serializers.ModelSerializer):
         fields = ('id', 'created', 'modified', 'name', 'slug', 'kind', 'event', 'speaker', 'venue', 'description',
                   'start', 'end', 'participation_open', 'participation_start', 'participation_end', 'is_offline',
                   'registration_quiz', 'feedback_quiz',)
+
+    def validate(self, data):
+        _data = super().validate(data)
+        start = _data.get('start')
+        end = _data.get('end')
+        if start > end:
+            raise serializers.ValidationError("end must occur after start")
+        return _data

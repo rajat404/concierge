@@ -13,10 +13,10 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = ('id', 'question', 'text_answer', 'choice_answer', 'participant', 'created', 'modified',)
 
     def validate(self, data):
-        data = super().validate(data)
-        question_obj = data.get('question')
-        text_answer = data.get('text_answer')
-        choice_answer = data.get('choice_answer')
+        _data = super().validate(data)
+        question_obj = _data.get('question')
+        text_answer = _data.get('text_answer')
+        choice_answer = _data.get('choice_answer')
 
         required = question_obj.required
         kind = question_obj.kind
@@ -32,4 +32,4 @@ class AnswerSerializer(serializers.ModelSerializer):
             # If `self.instance` is not None, it means the instance
             # already exists, and is being updated
             raise serializers.ValidationError({'question': 'Answer cannot be updated for this question.'})
-        return data
+        return _data
