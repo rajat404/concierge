@@ -29,7 +29,7 @@ class QuizViewset(MultiSerializerViewSetMixin, CURLViewSet):
     serializer_action_classes = {'create': QuizWriteSerializer}
 
     def create(self, request, *args, **kwargs):
-        """Quizzes are created immediately after Concourse creation,
+        """Quizzes are created immediately after Event creation,
         thus Quiz's `create` method doesn't create an instance of Quiz,
         but does create instances of `Question`
         """

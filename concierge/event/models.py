@@ -13,10 +13,10 @@ class Speaker(TimeStampedUUIDModel):
     last_name = models.CharField(max_length=120)
     email = models.EmailField(unique=True, db_index=True)
     about = models.TextField(blank=True)
-    history = HistoricalRecords(table_name='concourse_speaker_history')
+    history = HistoricalRecords(table_name='event_speaker_history')
 
     class Meta:
-        db_table = 'concourse_speaker'
+        db_table = 'event_speaker'
         verbose_name = _('Speaker')
         verbose_name_plural = _('Speakers')
 
@@ -24,8 +24,8 @@ class Speaker(TimeStampedUUIDModel):
         return '{} {}'.format(self.first_name, self.last_name)
 
 
-class Concourse(TimeStampedSlugUUIDModel):
-    CONCOURSE_CHOICES = (
+class Event(TimeStampedSlugUUIDModel):
+    EVENT_CHOICES = (
         ('EVENT', 'EVENT'),
         ('SESSION', 'SESSION'),
         ('MEETUP', 'MEETUP'),
@@ -37,31 +37,31 @@ class Concourse(TimeStampedSlugUUIDModel):
         # TODO: BOF & Open Spaces
     )
 
-    STATE_CHOICES = (
+    VISIBILITY_CHOICES = (
         ('PUBLIC', 'PUBLIC'),
         ('PRIVATE', 'PRIVATE'),
     )
 
-    kind = models.CharField(max_length=15, choices=CONCOURSE_CHOICES)
-    event = models.ForeignKey('self', blank=True, null=True)
-    speaker = models.ForeignKey(Speaker, related_name='concourses', null=True, blank=True)
+    kind = models.CharField(max_length=15, choices=EVENT_CHOICES)
+    happening = models.ForeignKey('self', blank=True, null=True)
+    speaker = models.ForeignKey(Speaker, related_name='events', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
-    # Need to be nullable, as the value will be populated after creation of the `Concourse` instance
-    registration_quiz = models.ForeignKey(Quiz, related_name='concourse_registration', null=True)
-    feedback_quiz = models.ForeignKey(Quiz, related_name='concourse_feedback', null=True)
-    history = HistoricalRecords(table_name='concourse_concourse_history')
+    # Need to be nullable, as the value will be populated after creation of the `Event` instance
+    registration_quiz = models.ForeignKey(Quiz, related_name='event_registration', null=True)
+    feedback_quiz = models.ForeignKey(Quiz, related_name='event_feedback', null=True)
+    history = HistoricalRecords(table_name='event_event_history')
     start = models.DateTimeField()
     end = models.DateTimeField()
-    participation_open = models.BooleanField(default=False, help_text='can a user participate in this concourse')
+    participation_open = models.BooleanField(default=False, help_text='can a user participate in this event')
     participation_start = models.DateTimeField(null=True, blank=True)
     participation_end = models.DateTimeField(null=True, blank=True)
     is_offline = models.BooleanField(default=True)
 
     class Meta:
-        db_table = 'concourse_concourse'
-        verbose_name = _('Concourse')
-        verbose_name_plural = _('Concourses')
+        db_table = 'event_event'
+        verbose_name = _('Event')
+        verbose_name_plural = _('Events')
 
     def __str__(self):
         return self.slug
@@ -73,21 +73,21 @@ class Concourse(TimeStampedSlugUUIDModel):
             return False
 
 
-class OfflineConcourse(TimeStampedUUIDModel):
-    concourse = models.OneToOneField(Concourse, related_name='offline')
+class OfflineEvent(TimeStampedUUIDModel):
+    event = models.OneToOneField(Event, related_name='offline')
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     address = models.TextField()
     address_guidelines = models.TextField()
-    history = HistoricalRecords(table_name='concourse_offline_concourse_history')
+    history = HistoricalRecords(table_name='event_offline_event_history')
 
     class Meta:
-        db_table = 'concourse_offline_concourse'
-        verbose_name = _('Offline Concourse')
-        verbose_name_plural = _('Offline Concourses')
+        db_table = 'event_offline_event'
+        verbose_name = _('Offline Event')
+        verbose_name_plural = _('Offline Events')
 
     def __str__(self):
-        return self.concourse.slug
+        return self.event.slug
 
 
 class Organisation(TimeStampedSlugUUIDModel):
@@ -114,7 +114,7 @@ class SponsorCategory(models.Model):
     name = models.CharField(max_length=50, unique=True)
 
     class Meta:
-        db_table = 'concourse_sponsor_category'
+        db_table = 'event_sponsor_category'
         verbose_name = _('Sponsor Category')
         verbose_name_plural = _('Sponsor Categories')
 
@@ -123,15 +123,15 @@ class SponsorCategory(models.Model):
 
 
 class Sponsor(TimeStampedModel):
-    concourse = models.ForeignKey(Concourse)
+    event = models.ForeignKey(Event)
     organisation = models.ForeignKey(Organisation)
     category = models.ForeignKey(SponsorCategory, to_field='name')
-    history = HistoricalRecords(table_name='concourse_sponsor_history')
+    history = HistoricalRecords(table_name='event_sponsor_history')
 
     class Meta:
-        db_table = 'concourse_sponsor'
+        db_table = 'event_sponsor'
         verbose_name = _('Sponsor')
         verbose_name_plural = _('Sponsors')
 
     def __str__(self):
-        return '{}--{}'.format(self.organisation, self.concourse)
+        return '{}--{}'.format(self.organisation, self.event)

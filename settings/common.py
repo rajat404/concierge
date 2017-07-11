@@ -48,7 +48,7 @@ THIRD_PARTY_APPS = (
 CUSTOM_APPS = (
     'concierge.base',
     'concierge.users',
-    'concierge.concourse',
+    'concierge.event',
     'concierge.quiz',
     'concierge.participant',
     'concierge.answer',

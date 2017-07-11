@@ -4,15 +4,15 @@
 from rest_framework import routers
 
 from concierge.answer import api as answer_api
-from concierge.concourse import api as concourse_api
+from concierge.event import api as event_api
 from concierge.participant import api as participant_api
 from concierge.quiz import api as quiz_api
 
 router = routers.DefaultRouter(trailing_slash=False)
 
-# Concourse
-router.register(r'speaker', concourse_api.SpeakerViewset, base_name='speaker')
-router.register(r'concourse', concourse_api.ConcourseViewset, base_name='concourse')
+# Event
+router.register(r'speaker', event_api.SpeakerViewset, base_name='speaker')
+router.register(r'event', event_api.EventViewset, base_name='event')
 
 # Participant
 router.register(r'participant', participant_api.ParticipantViewset, base_name='participant')

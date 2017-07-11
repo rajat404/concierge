@@ -22,7 +22,7 @@ class ParticipantAdmin(HistoryExportAdmin):
         'created',
         'modified',
         'user',
-        'concourse',
+        'event',
         'kind',
         'tshirt_size',
     )
@@ -30,7 +30,7 @@ class ParticipantAdmin(HistoryExportAdmin):
         'created',
         'modified',
         'user',
-        'concourse',
+        'event',
         'kind',
         'tshirt_size',
     )

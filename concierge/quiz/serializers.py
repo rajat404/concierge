@@ -68,7 +68,7 @@ class QuizSerializer(serializers.ModelSerializer):
 
 
 class QuizWriteSerializer(serializers.ModelSerializer):
-    """`Quiz` instances shall only be created via `Concourse` creation.
+    """`Quiz` instances shall only be created via `Event` creation.
 
     This Serializer deliberately removes the `unique=True` validation
     from `label` which the ModelSerializer imposes,
