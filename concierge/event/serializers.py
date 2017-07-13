@@ -1,5 +1,7 @@
+# Third Party Stuff
 from rest_framework import serializers
 
+# Concierge Stuff
 from concierge.base.serializers import DisplayChoiceField
 
 from .models import Event, Speaker

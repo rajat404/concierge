@@ -1,10 +1,11 @@
+# Third Party Stuff
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
-from concierge.base.models import (TimeStampedModel, TimeStampedSlugUUIDModel,
-                                   TimeStampedUUIDModel)
+# Concierge Stuff
+from concierge.base.models import TimeStampedModel, TimeStampedSlugUUIDModel, TimeStampedUUIDModel
 from concierge.quiz.models import Quiz
 
 

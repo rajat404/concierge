@@ -1,7 +1,9 @@
+# Third Party Stuff
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
+# Concierge Stuff
 from concierge.base.models import TimeStampedUUIDModel
 from concierge.event.models import Event
 from concierge.users.models import User

@@ -1,5 +1,7 @@
+# Third Party Stuff
 from django.utils import timezone
 
+# Concierge Stuff
 from concierge.base.utils import create_instance
 from concierge.quiz.models import Quiz
 

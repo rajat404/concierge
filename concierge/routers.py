@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """This urls.py is for all API related URLs.
 """
+# Third Party Stuff
 from rest_framework import routers
 
+# Concierge Stuff
 from concierge.answer import api as answer_api
 from concierge.event import api as event_api
 from concierge.participant import api as participant_api

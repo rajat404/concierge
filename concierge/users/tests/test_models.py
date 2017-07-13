@@ -3,6 +3,7 @@
 # Third Party Stuff
 from django.test import TestCase
 
+# Concierge Stuff
 from concierge.users.models import User
 
 
