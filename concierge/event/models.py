@@ -10,11 +10,11 @@ from concierge.quiz.models import Quiz
 
 
 class Speaker(TimeStampedUUIDModel):
+    history = HistoricalRecords(table_name='event_speaker_history')
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
     email = models.EmailField(unique=True, db_index=True)
     about = models.TextField(blank=True)
-    history = HistoricalRecords(table_name='event_speaker_history')
 
     class Meta:
         db_table = 'event_speaker'
@@ -43,20 +43,24 @@ class Event(TimeStampedSlugUUIDModel):
         ('PRIVATE', 'PRIVATE'),
     )
 
+    # Need to be nullable, as the value will be populated after creation of the `Event` instance
+    registration_quiz = models.ForeignKey(Quiz, related_name='event_registration', null=True)
+    feedback_quiz = models.ForeignKey(Quiz, related_name='event_feedback', null=True)
+
+    history = HistoricalRecords(table_name='event_event_history')
     kind = models.CharField(max_length=15, choices=EVENT_CHOICES)
     happening = models.ForeignKey('self', blank=True, null=True)
     speaker = models.ForeignKey(Speaker, related_name='events', null=True, blank=True)
     venue = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(blank=True)
-    # Need to be nullable, as the value will be populated after creation of the `Event` instance
-    registration_quiz = models.ForeignKey(Quiz, related_name='event_registration', null=True)
-    feedback_quiz = models.ForeignKey(Quiz, related_name='event_feedback', null=True)
-    history = HistoricalRecords(table_name='event_event_history')
     start = models.DateTimeField()
     end = models.DateTimeField()
     participation_open = models.BooleanField(default=False, help_text='can a user participate in this event')
     participation_start = models.DateTimeField(null=True, blank=True)
     participation_end = models.DateTimeField(null=True, blank=True)
+    rsvp_open = models.BooleanField(default=False, help_text='can a participant RSVP for this event')
+    rsvp_start = models.DateTimeField(null=True, blank=True)
+    rsvp_end = models.DateTimeField(null=True, blank=True)
     is_offline = models.BooleanField(default=True)
 
     class Meta:
@@ -75,12 +79,12 @@ class Event(TimeStampedSlugUUIDModel):
 
 
 class OfflineEvent(TimeStampedUUIDModel):
+    history = HistoricalRecords(table_name='event_offline_event_history')
     event = models.OneToOneField(Event, related_name='offline')
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     address = models.TextField()
     address_guidelines = models.TextField()
-    history = HistoricalRecords(table_name='event_offline_event_history')
 
     class Meta:
         db_table = 'event_offline_event'
@@ -98,8 +102,8 @@ class Organisation(TimeStampedSlugUUIDModel):
         ('OTHER', 'OTHER'),
     )
 
-    kind = models.CharField(max_length=15, choices=ORG_CHOICES)
     history = HistoricalRecords(table_name='organisation_organisation_history')
+    kind = models.CharField(max_length=15, choices=ORG_CHOICES)
 
     class Meta:
         db_table = 'organisation_organisation'
@@ -124,10 +128,10 @@ class SponsorCategory(models.Model):
 
 
 class Sponsor(TimeStampedModel):
+    history = HistoricalRecords(table_name='event_sponsor_history')
     event = models.ForeignKey(Event)
     organisation = models.ForeignKey(Organisation)
     category = models.ForeignKey(SponsorCategory, to_field='name')
-    history = HistoricalRecords(table_name='event_sponsor_history')
 
     class Meta:
         db_table = 'event_sponsor'

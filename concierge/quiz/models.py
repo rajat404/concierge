@@ -23,6 +23,7 @@ class Question(TimeStampedUUIDModel):
         ('OTHER', 'OTHER'),
     )
 
+    history = HistoricalRecords(table_name='question_question_history')
     text = models.TextField(blank=False, unique=True)
     kind = models.CharField(max_length=15, choices=ANSWER_CHOICES)
     # description = models.CharField(max_length=50, blank=True)
@@ -31,7 +32,6 @@ class Question(TimeStampedUUIDModel):
     choices = JSONField(null=True)
     correct_choices = ArrayField(models.CharField(max_length=100, blank=True), null=True, blank=True,
                                  help_text='array field to support selection of multiple choices')
-    history = HistoricalRecords(table_name='question_question_history')
 
     class Meta:
         db_table = 'quiz_question'

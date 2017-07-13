@@ -36,11 +36,12 @@ class ParticipantType(models.Model):
 
 
 class Participant(TimeStampedUUIDModel):
+    history = HistoricalRecords(table_name='participant_participant_history')
     user = models.ForeignKey(User)
     event = models.ForeignKey(Event)
     kind = models.ForeignKey(ParticipantType, to_field='kind', null=True, blank=True)
     tshirt_size = models.ForeignKey(TshirtSize, to_field='size', null=True, blank=True)
-    history = HistoricalRecords(table_name='participant_participant_history')
+    rsvp = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'participant_participant'

@@ -22,8 +22,8 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ('id', 'created', 'modified', 'name', 'slug', 'kind', 'happening', 'speaker', 'venue', 'description',
-                  'start', 'end', 'participation_open', 'participation_start', 'participation_end', 'is_offline',
-                  'registration_quiz', 'feedback_quiz',)
+                  'registration_quiz', 'feedback_quiz', 'start', 'end', 'participation_open', 'participation_start',
+                  'participation_end', 'rsvp_open', 'rsvp_start', 'rsvp_end', 'is_offline',)
 
     def validate(self, data):
         _data = super().validate(data)

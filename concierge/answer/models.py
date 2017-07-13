@@ -12,8 +12,8 @@ class Answer(AnswerHelper):
     """`AnswerHelper adds the fields - id(UUID), question, text_answer,
     choice_answer, created, modified
     """
-    participant = models.ForeignKey(Participant, related_name='answers')
     history = HistoricalRecords(table_name='answer_history')
+    participant = models.ForeignKey(Participant, related_name='answers')
 
     class Meta:
         unique_together = ('question', 'participant')
