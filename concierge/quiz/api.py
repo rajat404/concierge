@@ -5,7 +5,7 @@ from rest_framework.parsers import MultiPartParser
 
 from concierge.base import response as rsp
 from concierge.base.api.mixins import MultiSerializerViewSetMixin
-from concierge.base.api.viewsets import CURLViewSet
+from concierge.base.api.viewsets import NoDeleteModelViewSet
 
 from .models import Question, Quiz
 from .serializers import (QuestionSerializer, QuizSerializer,
@@ -13,7 +13,7 @@ from .serializers import (QuestionSerializer, QuizSerializer,
 from .services import create_question, create_quiz
 
 
-class QuestionViewset(CURLViewSet):
+class QuestionViewset(NoDeleteModelViewSet):
     queryset = Question.objects.order_by('created')
     serializer_class = QuestionSerializer
 
@@ -23,7 +23,7 @@ class QuestionViewset(CURLViewSet):
         return rsp.Created(serializer.data)
 
 
-class QuizViewset(MultiSerializerViewSetMixin, CURLViewSet):
+class QuizViewset(MultiSerializerViewSetMixin, NoDeleteModelViewSet):
     queryset = Quiz.objects.order_by('created')
     serializer_class = QuizSerializer
     serializer_action_classes = {'create': QuizWriteSerializer}
