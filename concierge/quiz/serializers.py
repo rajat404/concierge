@@ -57,7 +57,7 @@ class QuestionSerializer(serializers.ModelSerializer):
         if kind == 'MCQ':
             # By default, `serializers.JSONField` accepts empty dicts but if
             # `choices` is mandatory, then `choices` shouldn't be an empty dict
-            if choices in ({}, None):
+            if not choices:
                 raise serializers.ValidationError({'choices': 'This field is required for MCQs'})
         return _data
 

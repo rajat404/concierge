@@ -58,9 +58,6 @@ class Event(TimeStampedSlugUUIDModel):
     participation_open = models.BooleanField(default=False, help_text='can a user participate in this event')
     participation_start = models.DateTimeField(null=True, blank=True)
     participation_end = models.DateTimeField(null=True, blank=True)
-    rsvp_open = models.BooleanField(default=False, help_text='can a participant RSVP for this event')
-    rsvp_start = models.DateTimeField(null=True, blank=True)
-    rsvp_end = models.DateTimeField(null=True, blank=True)
     is_offline = models.BooleanField(default=True)
 
     class Meta:
@@ -72,10 +69,9 @@ class Event(TimeStampedSlugUUIDModel):
         return self.slug
 
     def can_participate(self):
-        if self.participation_open and (self.participation_start <= timezone.now() < self.participation_end):
-            return True
-        else:
-            return False
+        # Valiation for `participation_start` & `participation_end` is handled by the serializer
+        # These value cannot be None
+        return bool(self.participation_open and (self.participation_start <= timezone.now() < self.participation_end))
 
 
 class OfflineEvent(TimeStampedUUIDModel):
@@ -85,6 +81,9 @@ class OfflineEvent(TimeStampedUUIDModel):
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     address = models.TextField()
     address_guidelines = models.TextField()
+    rsvp_open = models.BooleanField(default=False, help_text='can a participant RSVP for this event')
+    rsvp_start = models.DateTimeField(null=True, blank=True)
+    rsvp_end = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         db_table = 'event_offline_event'

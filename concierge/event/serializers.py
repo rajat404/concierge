@@ -4,7 +4,7 @@ from rest_framework import serializers
 # Concierge Stuff
 from concierge.base.serializers import DisplayChoiceField
 
-from .models import Event, Speaker
+from .models import Event, OfflineEvent, Speaker
 
 
 class SpeakerSerializer(serializers.ModelSerializer):
@@ -23,12 +23,22 @@ class EventSerializer(serializers.ModelSerializer):
         model = Event
         fields = ('id', 'created', 'modified', 'name', 'slug', 'kind', 'happening', 'speaker', 'venue', 'description',
                   'registration_quiz', 'feedback_quiz', 'start', 'end', 'participation_open', 'participation_start',
-                  'participation_end', 'rsvp_open', 'rsvp_start', 'rsvp_end', 'is_offline',)
+                  'participation_end', 'is_offline',)
 
     def validate(self, data):
-        _data = super().validate(data)
-        start = _data.get('start')
-        end = _data.get('end')
-        if start > end:
-            raise serializers.ValidationError("end must occur after start")
-        return _data
+        data = super().validate(data)
+        if data['start'] > data['end']:
+            raise serializers.ValidationError('`end` must occur after `start`')
+        if data['participation_open']:
+            if all([data['participation_start'], data['participation_end']]) is False:
+                error_dict = {'participation_open': '`participation_start` & `participation_end` also required'}
+                raise serializers.ValidationError(error_dict)
+        return data
+
+
+class OfflineEventSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = OfflineEvent
+        fields = ('id', 'created', 'modified', 'event', 'longitude', 'latitude', 'address', 'address_guidelines',
+                  'rsvp_open', 'rsvp_start', 'rsvp_end',)

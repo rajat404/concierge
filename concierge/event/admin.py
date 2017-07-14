@@ -1,10 +1,26 @@
 # Third Party Stuff
+from django import forms
 from django.contrib import admin
 
 # Concierge Stuff
 from concierge.base.admin import ExportAdmin, HistoryExportAdmin
 
 from . import models
+
+
+class EventForm(forms.ModelForm):
+
+    def clean(self):
+        cleaned_data = super().clean()
+        if cleaned_data['start'] > cleaned_data['end']:
+            raise forms.ValidationError('`end` must occur after `start`')
+        if cleaned_data['participation_open']:
+            error_msg = 'This field is required for `participation_open`'
+            if not cleaned_data['participation_start']:
+                self.add_error('participation_start', error_msg)
+            if not cleaned_data['participation_end']:
+                self.add_error('participation_end', error_msg)
+        return cleaned_data
 
 
 class OrganisationAdmin(HistoryExportAdmin):
@@ -36,12 +52,37 @@ class EventAdmin(HistoryExportAdmin):
         'modified',
         'name',
         'slug',
+        'registration_quiz',
+        'feedback_quiz',
         'kind',
-        'event',
+        'happening',
         'speaker',
+        'venue',
+        'description',
+        'start',
+        'end',
+        'participation_open',
+        'participation_start',
+        'participation_end',
+        'is_offline',
+    )
+    list_filter = (
+        'created',
+        'modified',
+        'registration_quiz',
+        'feedback_quiz',
+        'happening',
+        'speaker',
+        'start',
+        'end',
+        'participation_open',
+        'participation_start',
+        'participation_end',
+        'is_offline',
     )
     list_filter = ('created', 'modified')
     search_fields = ('name', 'slug')
+    form = EventForm
 
 
 class OfflineEventAdmin(HistoryExportAdmin):
@@ -55,6 +96,17 @@ class OfflineEventAdmin(HistoryExportAdmin):
         'latitude',
         'address',
         'address_guidelines',
+        'rsvp_open',
+        'rsvp_start',
+        'rsvp_end',
+    )
+    list_filter = (
+        'created',
+        'modified',
+        'event',
+        'rsvp_open',
+        'rsvp_start',
+        'rsvp_end',
     )
     list_filter = ('created', 'modified', 'event')
 

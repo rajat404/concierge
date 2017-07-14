@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Standard Library
 import uuid
 

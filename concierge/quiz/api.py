@@ -47,7 +47,7 @@ class QuizUploadViewset(viewsets.GenericViewSet):
 
     def create(self, request, *args, **kwargs):
         file_obj = request.data.get('file')
-        data = json.load(file_obj)
+        data = json.load(file_obj) if file_obj else None
         serializer = self.get_serializer(data=data)
         create_quiz(serializer)
         return rsp.Created(serializer.data)

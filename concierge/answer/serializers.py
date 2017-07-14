@@ -25,9 +25,9 @@ class AnswerSerializer(serializers.ModelSerializer):
         editable = question_obj.editable
 
         if required:
-            if kind == 'MCQ' and choice_answer in ('', None):
+            if kind == 'MCQ' and not choice_answer:
                 raise serializers.ValidationError({'choice_answer': 'This field is required.'})
-            if kind == 'PARAGRAPH' and text_answer in ('', None):
+            if kind == 'PARAGRAPH' and not text_answer:
                 raise serializers.ValidationError({'text_answer': 'This field is required.'})
 
         if self.instance and editable is False:
