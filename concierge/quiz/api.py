@@ -2,20 +2,25 @@
 import json
 
 # Third Party Stuff
-from rest_framework import viewsets
+from rest_framework import mixins, viewsets
 from rest_framework.parsers import MultiPartParser
+from rest_framework.viewsets import GenericViewSet
 
 # Concierge Stuff
 from concierge.base import response as rsp
 from concierge.base.api.mixins import MultiSerializerViewSetMixin
-from concierge.base.api.viewsets import NoDeleteModelViewSet
 
 from .models import Question, Quiz
 from .serializers import QuestionSerializer, QuizSerializer, QuizWriteSerializer
 from .services import create_question, create_quiz
 
 
-class QuestionViewset(NoDeleteModelViewSet):
+class QuestionViewset(mixins.CreateModelMixin,
+                      mixins.RetrieveModelMixin,
+                      mixins.UpdateModelMixin,
+                      mixins.ListModelMixin,
+                      GenericViewSet):
+
     queryset = Question.objects.order_by('created')
     serializer_class = QuestionSerializer
 
@@ -25,7 +30,13 @@ class QuestionViewset(NoDeleteModelViewSet):
         return rsp.Created(serializer.data)
 
 
-class QuizViewset(MultiSerializerViewSetMixin, NoDeleteModelViewSet):
+class QuizViewset(MultiSerializerViewSetMixin,
+                  mixins.CreateModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  mixins.ListModelMixin,
+                  GenericViewSet):
+
     queryset = Quiz.objects.order_by('created')
     serializer_class = QuizSerializer
     serializer_action_classes = {'create': QuizWriteSerializer}
@@ -41,6 +52,7 @@ class QuizViewset(MultiSerializerViewSetMixin, NoDeleteModelViewSet):
 
 
 class QuizUploadViewset(viewsets.GenericViewSet):
+
     queryset = Quiz.objects.order_by('created')
     serializer_class = QuizWriteSerializer
     parser_classes = (MultiPartParser, )
