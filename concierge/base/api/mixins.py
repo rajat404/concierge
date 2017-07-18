@@ -1,3 +1,6 @@
+from django.core.exceptions import ImproperlyConfigured
+
+
 class MultiSerializerViewSetMixin(object):
 
     def get_serializer_class(self):
@@ -26,3 +29,34 @@ class MultiSerializerViewSetMixin(object):
             return self.serializer_action_classes[self.action]
         except (KeyError, AttributeError):
             return super().get_serializer_class()
+
+
+class TemplateNamesMixin(object):
+
+    def get_template_names(self):
+        """
+        Look for `template_names` field in the ViewSet, which
+        should be a dict mapping action name (key) to template name (value),
+        i.e.:
+
+        class MyViewSet(TemplateNamesMixin, ViewSet):
+            template_name = 'default.html'
+            template_names = {
+                'list': 'list_template.html',
+                'my_action': 'my_action_template.html'
+            }
+
+            @list_route
+            def my_action:
+                ...
+
+        If there's no entry for that action, then return `template_name`
+        """
+        if hasattr(self, 'template_names') and self.action in self.template_names:
+            return [self.template_names[self.action]]
+        elif hasattr(self, 'template_name'):
+            return [self.template_name]
+        raise ImproperlyConfigured(
+            'Returned a template response with no `template_name` or '
+            '`template_names` attribute set on the view'
+        )
