@@ -21,6 +21,7 @@ env = environ.Env()
 
 DJANGO_INIT_APPS = (
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django_sites',  # http://niwinz.github.io/django-sites/latest/
@@ -43,9 +44,15 @@ THIRD_PARTY_APPS = (
     'import_export',
     'simple_history',  # Middleware also added for the same
     # 'waffle',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    'allauth.socialaccount.providers.twitter',
 )
 
-CUSTOM_APPS = (
+CONCIERGE_APPS = (
     'concierge.base',
     'concierge.users',
     'concierge.event',
@@ -54,7 +61,7 @@ CUSTOM_APPS = (
     'concierge.answer',
 )
 
-INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
+INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CONCIERGE_APPS
 
 # INSTALLED APPS CONFIGURATION
 # ==========================================================================
@@ -62,7 +69,10 @@ INSTALLED_APPS = DJANGO_INIT_APPS + THIRD_PARTY_APPS + CUSTOM_APPS
 # django.contrib.auth
 # ------------------------------------------------------------------------------
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.Argon2PasswordHasher',
@@ -125,13 +135,14 @@ REST_FRAMEWORK = {
         'rest_framework_filters.backends.DjangoFilterBackend',
     ),
 }
-# DJANGO_SITES
-# ------------------------------------------------------------------------------
-# see: http://django-sites.readthedocs.org
-SITES = {
-    'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
-}
-SITE_ID = 'local'
+# # DJANGO_SITES
+# # ------------------------------------------------------------------------------
+# # see: http://django-sites.readthedocs.org
+# SITES = {
+#     'local': {'domain': 'localhost:8000', 'scheme': 'http', 'name': 'localhost'},
+# }
+# SITE_ID = 'local'
+SITE_ID = 1
 
 # MIDDLEWARE CONFIGURATION
 # ------------------------------------------------------------------------------
@@ -423,3 +434,14 @@ RELEASE_VERSION = get_release()
 SITE_INFO = {
     'RELEASE_VERSION': RELEASE_VERSION,
 }
+
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_SUBJECT_PREFIX = "[{}] ".format(SITE_VARIABLES['site_name'])
+ACCOUNT_LOGOUT_ON_GET = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'http'
+
+# EMAIL_SUBJECT_PREFIX = ACCOUNT_EMAIL_SUBJECT_PREFIX
+
+LOGIN_REDIRECT_URL = '/'

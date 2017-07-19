@@ -51,6 +51,8 @@ class User(AbstractBaseUser, UUIDModel, PermissionsMixin):
                                               'active. Unselect this instead of deleting accounts.')
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     institution = models.CharField(max_length=100, blank=True)
+    username = models.CharField(max_length=100, blank=True)
+    # TODO: See if needed after django-allauth
     github_username = models.CharField(max_length=100, blank=True)
     twitter_username = models.CharField(max_length=100, blank=True)
     contact = models.CharField(max_length=15, blank=True)

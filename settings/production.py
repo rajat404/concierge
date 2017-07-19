@@ -37,15 +37,16 @@ ADMINS = getaddresses([env('DJANGO_ADMINS')])
 # notifications and other various emails.
 MANAGERS = ADMINS
 
-# DJANGO_SITES
-# ------------------------------------------------------------------------------
-# see: http://niwinz.github.io/django-sites/latest/
-SITES['remote'] = {  # noqa: F405
-    'domain': env('SITE_DOMAIN'),
-    'scheme': SITE_SCHEME,
-    'name': env('SITE_NAME'),
-}
-SITE_ID = env('DJANGO_SITE_ID', default='remote')
+# # DJANGO_SITES
+# # ------------------------------------------------------------------------------
+# # see: http://niwinz.github.io/django-sites/latest/
+# SITES['remote'] = {  # noqa: F405
+#     'domain': env('SITE_DOMAIN'),
+#     'scheme': SITE_SCHEME,
+#     'name': env('SITE_NAME'),
+# }
+# SITE_ID = env('DJANGO_SITE_ID', default='remote')
+SITE_ID = env('DJANGO_SITE_ID', default=1)
 
 # Basic Auth Protection
 # -----------------------------------------------------------------------------

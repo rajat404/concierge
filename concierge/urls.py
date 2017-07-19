@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
     # Your stuff: custom urls go here
+    # Django AllAuth
+    url(r'^accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += [
