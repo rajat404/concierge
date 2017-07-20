@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<div class="event">
+  <div class="event-header">
+    <h1>{{name}}</h1>
+  </div>
+  <div class="event-content">
+    <div class="event-detail-content">
+      <ul>
+        <li>id: {{id}}</li>
+        <li>name: {{name}}</li>
+        <li>slug: {{slug}}</li>
+        <li>created: {{created}}</li>
+        <li>modified: {{modified}}</li>
+        <li>kind: {{kind}}</li>
+        <li>happening: {{happening}}</li>
+        <li>speaker: {{speaker}}</li>
+        <li>venue: {{venue}}</li>
+        <li>description: {{description}}</li>
+        <li>start: {{start}}</li>
+        <li>end: {{end}}</li>
+        <li>participation_open: {{participation_open}}</li>
+        <li>participation_start: {{participation_start}}</li>
+        <li>participation_end: {{participation_end}}</li>
+        <li>is_offline: {{is_offline}}</li>
+      </ul>
+    </div>
+    {% if offline %}
+    <div class="event-offline">
+      <div class="event-offline-header">
+        <h2>Offline Event Details</h2>
+      </div>
+      <div class="event-offline-content"></div>
+      <ul>
+        <li>id: {{offline.id}}</li>
+        <li>created: {{offline.created}}</li>
+        <li>modified: {{offline.modified}}</li>
+        <li>event: {{offline.event}}</li>
+        <li>longitude: {{offline.longitude}}</li>
+        <li>latitude: {{offline.latitude}}</li>
+        <li>address: {{offline.address}}</li>
+        <li>address_guidelines: {{offline.address_guidelines}}</li>
+        <li>rsvp_open: {{offline.rsvp_open}}</li>
+        <li>rsvp_start: {{offline.rsvp_start}}</li>
+        <li>rsvp_end: {{offline.rsvp_end}}</li>
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

@@ -29,14 +29,18 @@ class EventViewset(mixins.CreateModelMixin,
                    TemplateNamesMixin,
                    GenericViewSet):
 
-    queryset = Event.objects.order_by('id')
+    queryset = Event.objects.order_by('start')
     serializer_class = EventSerializer
-    template_name = 'event_list.html'
+    template_name = 'event/list.html'
     template_names = {
-        'list': 'event_list.html',
+        'list': 'event/list.html',
+        'retrieve': 'event/detail.html',
     }
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         create_event(serializer)
         return rsp.Created(serializer.data)
+
+# TODO: Add ViewSet for OfflineEvent
+
