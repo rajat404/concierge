@@ -38,6 +38,7 @@ urlpatterns += [
     url(r'^api/v1/', include(routers.router.urls)),
 
     # Django Admin
+    url(r'^{}/doc/'.format(settings.DJANGO_ADMIN_URL), include('django.contrib.admindocs.urls')),
     url(r'^{}/'.format(settings.DJANGO_ADMIN_URL), admin.site.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

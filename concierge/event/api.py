@@ -7,8 +7,8 @@ from rest_framework.viewsets import GenericViewSet
 from concierge.base import response as rsp
 from concierge.base.api.mixins import TemplateNamesMixin
 
-from .models import Event, Speaker
-from .serializers import EventSerializer, SpeakerSerializer
+from .models import Speaker, Event, OfflineEvent
+from .serializers import SpeakerSerializer, EventSerializer, OfflineEventSerializer
 from .services import create_event
 
 
@@ -42,5 +42,12 @@ class EventViewset(mixins.CreateModelMixin,
         create_event(serializer)
         return rsp.Created(serializer.data)
 
-# TODO: Add ViewSet for OfflineEvent
 
+class OfflineEventViewset(mixins.CreateModelMixin,
+                          mixins.RetrieveModelMixin,
+                          mixins.UpdateModelMixin,
+                          mixins.ListModelMixin,
+                          GenericViewSet):
+
+    queryset = OfflineEvent.objects.order_by('id')
+    serializer_class = OfflineEventSerializer

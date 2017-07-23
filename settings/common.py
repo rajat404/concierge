@@ -29,6 +29,7 @@ DJANGO_INIT_APPS = (
     'django.contrib.staticfiles',
     'flat_responsive',
     'django.contrib.admin',
+    'django.contrib.admindocs',
     # 'django.contrib.humanize',  # Useful template tags
 
     'rest_framework',  # http://www.django-rest-framework.org/

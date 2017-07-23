@@ -13,10 +13,10 @@ The APIs supports Token Auth.
 
 When using Token auth, each request requires the following headers:
 
-Header        | Value
-------------- | ---------------
-Content-Type  | application/json
-Authorization | Token `<token-string>`
+| Header        | Value                  |
+|:--------------|:-----------------------|
+| Content-Type  | application/json       |
+| Authorization | Token `<token-string>` |
 
 
 A token is generated on creation of every User. For generating tokens of existing Users in your database,
@@ -36,10 +36,10 @@ This is the only API that doesn't require Authorization header, and requires a t
 
 **Payload:**
 
-param name  | type    |
-------------|---------|
-username    | string  |
-password    | string  |
+| param name | type   |
+|:-----------|:-------|
+| username   | string |
+| password   | string |
 
 **Response:**
 
@@ -53,17 +53,17 @@ password    | string  |
 
 ### Question format
 
-Parameter           | Type      | Description
---------------------|-----------|----------------------------------------------
-text                | string    | The text of the question
-quizzes             | array     | A list of labels of all quizzes, the question belongs to<br><br>Needed only if available
-kind                | string    | The type of the accepted format of the answer <br><br> Currently acceptable options are **MCQ** & **PARAGRAPH**
-required            | boolean   | Is the question manadatory to attempt
-editable            | boolean   | Can the answer be changed after attempting the question
-choices             | json      | A json of all choices. `choices` has sub-types - `type` & `value`<br><br>Needed only when `kind` is **MCQ**.
-choices.type        | string    | It refers to the choice type. This field denotes how the option will be rendered to the end user. It can be <li>**TEXT**<br><li>**URL**<br><li>**OTHER** - To be used when you want to give user the choice to enter a value other than those listed in the options.
-choice.value        | string    | The actual value of the option, which is visible to the user
-correct_choices     | array     | A list of all the correct choices<br><br>Needed only when `kind` is **MCQ**.
+| Parameter       | Type    | Description                                                                                                                                                                                                                                                          |
+|:----------------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| text            | string  | The text of the question                                                                                                                                                                                                                                             |
+| quizzes         | array   | A list of labels of all quizzes, the question belongs to<br><br>Needed only if available                                                                                                                                                                             |
+| kind            | string  | The type of the accepted format of the answer <br><br> Currently acceptable options are **MCQ** & **PARAGRAPH**                                                                                                                                                      |
+| required        | boolean | Is the question manadatory to attempt                                                                                                                                                                                                                                |
+| editable        | boolean | Can the answer be changed after attempting the question                                                                                                                                                                                                              |
+| choices         | json    | A json of all choices. `choices` has sub-types - `type` & `value`<br><br>Needed only when `kind` is **MCQ**.                                                                                                                                                         |
+| choices.type    | string  | It refers to the choice type. This field denotes how the option will be rendered to the end user. It can be <li>**TEXT**<br><li>**URL**<br><li>**OTHER** - To be used when you want to give user the choice to enter a value other than those listed in the options. |
+| choice.value    | string  | The actual value of the option, which is visible to the user                                                                                                                                                                                                         |
+| correct_choices | array   | A list of all the correct choices<br><br>Needed only when `kind` is **MCQ**.                                                                                                                                                                                         |
 
 
 ### Add a question
@@ -127,10 +127,10 @@ TODO
 
 **Payload:**
 
-Parameter           | Type               | Description
---------------------|--------------------|---------------------------------------
-label               | string             | Label of the quiz
-questions           | array (of strings) | List of `id`s of questions
+| Parameter | Type               | Description                |
+|:----------|:-------------------|:---------------------------|
+| label     | string             | Label of the quiz          |
+| questions | array (of strings) | List of `id`s of questions |
 
 **Sample Request**
 ```json
@@ -161,10 +161,10 @@ TODO
 
 **Payload:**
 
-Parameter           | Type      | Description
---------------------|-----------|----------------------------------------------
-label               | string    | Unique label of the quiz. Note that the `label` already exists for every Quiz. Use only pre-existing labels.
-questions           | array     | A list of questions (as per the question format)
+| Parameter | Type   | Description                                                                                                  |
+|:----------|:-------|:-------------------------------------------------------------------------------------------------------------|
+| label     | string | Unique label of the quiz. Note that the `label` already exists for every Quiz. Use only pre-existing labels. |
+| questions | array  | A list of questions (as per the question format)                                                             |
 
 **Sample Request**
 ```json
