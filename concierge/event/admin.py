@@ -23,13 +23,6 @@ class EventForm(forms.ModelForm):
         return cleaned_data
 
 
-class OrganisationAdmin(HistoryExportAdmin):
-
-    list_display = ('id', 'created', 'modified', 'name', 'slug', 'kind')
-    list_filter = ('created', 'modified')
-    search_fields = ('name', 'slug')
-
-
 class SpeakerAdmin(HistoryExportAdmin):
 
     list_display = (
@@ -80,7 +73,6 @@ class EventAdmin(HistoryExportAdmin):
         'participation_end',
         'is_offline',
     )
-    list_filter = ('created', 'modified')
     search_fields = ('name', 'slug')
     form = EventForm
 
@@ -108,7 +100,13 @@ class OfflineEventAdmin(HistoryExportAdmin):
         'rsvp_start',
         'rsvp_end',
     )
-    list_filter = ('created', 'modified', 'event')
+
+
+class OrganisationAdmin(HistoryExportAdmin):
+
+    list_display = ('id', 'created', 'modified', 'name', 'slug', 'kind')
+    list_filter = ('created', 'modified')
+    search_fields = ('name', 'slug')
 
 
 class SponsorCategoryAdmin(ExportAdmin):
@@ -140,9 +138,9 @@ def _register(model, admin_class):
     admin.site.register(model, admin_class)
 
 
-_register(models.Organisation, OrganisationAdmin)
 _register(models.Speaker, SpeakerAdmin)
 _register(models.Event, EventAdmin)
 _register(models.OfflineEvent, OfflineEventAdmin)
+_register(models.Organisation, OrganisationAdmin)
 _register(models.SponsorCategory, SponsorCategoryAdmin)
 _register(models.Sponsor, SponsorAdmin)
