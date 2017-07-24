@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+td {
+    border: solid 2px lightgrey;
+}
+</style>
+
+    <h2>Questions</h2>
+    <table>
+        {% for question in question_list %}
+        <tr>
+          <td><b>id</b></td>
+          <td><a href="/quiz/question/{{ question.id }}">{{ question.id }}</a></td>
+        </tr>
+        <tr>
+          <td><b>text</b></td>
+          <td>{{ question.text }}</td>
+        </tr>
+        <tr>
+          <td><b>kind</b></td>
+          <td>{{ question.kind }}</td>
+        </tr>
+        <tr>
+          <td><b>required</b></td>
+          <td>{{ question.required }}</td>
+        </tr>
+        <tr>
+          <td><b>editable</b></td>
+          <td>{{ question.editable }}</td>
+        </tr>
+        <tr>
+          <td><b>choices</b></td>
+          <td>{{ question.choices }}</td>
+        </tr>
+        <tr>
+          <td><b>correct_choices</b></td>
+          <td>{{ question.correct_choices }}</td>
+        </tr>
+        <tr>
+            <td><b>created</b></td>
+            <td>{{ question.created }}</td>
+        </tr>
+        <tr>
+            <td><b>modified</b></td>
+            <td>{{ question.modified }}</td>
+        </tr>
+        <tr><td colspan="2"><hr></td></tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block content %}
+<div class="event-list">
+  <h1>Events</h1> {% for event in results %}
+  <div class="event-list-name">
+    <h3><a href="/api/v1/event/{{event.id}}?format=html">{{event.name}}</a></h3>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

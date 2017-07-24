@@ -11,6 +11,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
+from rest_framework.authtoken import views as authviews
 
 # Concierge Stuff
 from concierge.base import views as base_views
@@ -27,6 +28,7 @@ urlpatterns = [
     # Your stuff: custom urls go here
     # Django AllAuth
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^quiz/', include('concierge.quiz.urls')),
 ]
 
 urlpatterns += [
@@ -34,6 +36,7 @@ urlpatterns += [
     url(r'^(?P<filename>(robots.txt)|(humans.txt))$',
         base_views.root_txt_files, name='root-txt-files'),
 
+    url(r'^user/api-token-auth/', authviews.obtain_auth_token),
     # Rest API
     url(r'^api/v1/', include(routers.router.urls)),
 

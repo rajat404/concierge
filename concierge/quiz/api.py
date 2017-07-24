@@ -38,8 +38,11 @@ class QuizViewset(MultiSerializerViewSetMixin,
                   GenericViewSet):
 
     queryset = Quiz.objects.order_by('created')
+    filter_fields = ('label',)
     serializer_class = QuizSerializer
-    serializer_action_classes = {'create': QuizWriteSerializer}
+    serializer_action_classes = {
+        'create': QuizWriteSerializer,
+    }
 
     def create(self, request, *args, **kwargs):
         """Quizzes are created immediately after Event creation,

@@ -9,7 +9,7 @@ from concierge.quiz.models import AnswerHelper
 
 
 class Answer(AnswerHelper):
-    """`AnswerHelper adds the fields - id(UUID), question, text_answer,
+    """AnswerHelper adds the fields - id(UUID), question, text_answer,
     choice_answer, created, modified
     """
     history = HistoricalRecords(table_name='answer_history')

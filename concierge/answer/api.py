@@ -1,6 +1,3 @@
-# Concierge Stuff
-# Third Party Stuff
-# Third Party Stuff
 # Third Party Stuff
 from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet

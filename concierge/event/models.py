@@ -69,7 +69,7 @@ class Event(TimeStampedSlugUUIDModel):
         return self.slug
 
     def can_participate(self):
-        # Valiation for `participation_start` & `participation_end` is handled by the serializer
+        # Valiation for `participation_start` & `participation_end` is handled by the serializer.
         # These value cannot be None
         return bool(self.participation_open and (self.participation_start <= timezone.now() < self.participation_end))
 

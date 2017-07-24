@@ -1,0 +1,14 @@
+.event-header{
+    text-align: center;
+}
+
+.event-content{
+    display: flex;
+
+    &-detail{
+        flex: 1;
+    }
+    &-offline{
+        flex: 1;
+    }
+}

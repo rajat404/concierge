@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 # Third Party Stuff
-from rest_framework.response import Response
 from django import http
+from rest_framework.response import Response
 
 
 class Ok(Response):

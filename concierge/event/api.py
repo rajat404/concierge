@@ -7,8 +7,8 @@ from rest_framework.viewsets import GenericViewSet
 from concierge.base import response as rsp
 from concierge.base.api.mixins import TemplateNamesMixin
 
-from .models import Speaker, Event, OfflineEvent
-from .serializers import SpeakerSerializer, EventSerializer, OfflineEventSerializer
+from .models import Event, OfflineEvent, Speaker
+from .serializers import EventSerializer, OfflineEventSerializer, SpeakerSerializer
 from .services import create_event
 
 

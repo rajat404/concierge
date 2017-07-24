@@ -1,4 +1,20 @@
 # Third Party Stuff
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
+from .models import Question, Quiz
+
+
+class QuizList(ListView):
+    model = Quiz
+
+
+class QuizDetail(DetailView):
+    model = Quiz
+
+
+class QuestionList(ListView):
+    model = Question
+
+
+class QuestionDetail(DetailView):
+    model = Question

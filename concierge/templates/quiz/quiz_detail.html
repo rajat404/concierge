@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+td {
+    border: solid 2px lightgrey;
+}
+</style>
+
+<h2>Quiz</h2>
+<table>
+    <tr>
+        <td><b>id</b></td>
+        <td>{{ quiz.id }}</td>
+    </tr>
+    <tr>
+        <td><b>label</b></td>
+        <td>{{ quiz.label }}</td>
+    </tr>
+    <tr>
+        <td><b>created</b></td>
+        <td>{{ quiz.created }}</td>
+    </tr>
+    <tr>
+        <td><b>modified</b></td>
+        <td>{{ quiz.modified }}</td>
+    </tr>
+</table>
+{% endblock %}
