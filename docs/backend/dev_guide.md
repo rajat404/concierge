@@ -1,12 +1,10 @@
 # Dev Guide
 
 ## Admin
-To auto-generate `admin.py` file of each app, simply use [django-admin-generator](https://github.com/WoLpH/django-admin-generator). Invoke it in the following way:
+To auto-generate `admin.py` file of each app, simply run
 ```
-./manage.py admin_generator 'concierge.<app_name>' >> concierge/<app_name>/admin.py
+./manage.py admin_generator 'concierge.<app_name>'
 ```
-Though do remove the `prepopulated_fields` line from admin.py (if present)
-
-## Fixtures
-To load all fixtures, run the shell script `load_fixtures.sh`
-
+This will create the contents of the admin file based on the app models.
+If `admin.py` already exists, then the new contents will be appended to the original file.
+In any case, do review the newly generated file. Also check for unused imports.

@@ -22,11 +22,6 @@ INTERNAL_IPS = ('127.0.0.1', '192.168.33.12', )
 
 ALLOWED_HOSTS = ['*']
 
-# Auto-generate Admin files
-# ------------------------------------------------------------------------------
-# https://github.com/WoLpH/django-admin-generator
-INSTALLED_APPS += ('django_admin_generator', )
-
 # Staticfiles
 # ------------------------------------------------------------------------------
 # Disable Django's static file handling and allow WhiteNoise to take over. This

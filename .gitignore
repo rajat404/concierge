@@ -135,7 +135,7 @@ ENV/
 .staticfiles/
 
 # Development related stuff
-dev/
+devlocal/
 
 # Remove before initial release
 migrations/
