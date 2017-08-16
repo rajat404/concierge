@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link type="text/scss" href="/static/scss/apps/question.scss">
+<form action="." method = "POST" class="form-horizontal" style='padding: 1em 0 5em'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary" style="margin-top: 2em">Submit</button>
+</form>
+
+{% endblock %}

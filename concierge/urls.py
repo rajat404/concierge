@@ -29,6 +29,7 @@ urlpatterns = [
     # Django AllAuth
     url(r'^accounts/', include('allauth.urls')),
     url(r'^quiz/', include('concierge.quiz.urls')),
+    url(r'^answer/', include('concierge.answer.urls')),
 ]
 
 urlpatterns += [
