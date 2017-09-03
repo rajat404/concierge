@@ -11,7 +11,7 @@ Usages:
 There is a bit of magic going on behind the scenes with `G` method from https://django-dynamic-fixture.readthedocs.io/
 """
 
-# Third Party Stuff
+# Third Party Imports
 from django.apps import apps
 from django.conf import settings
 from django_dynamic_fixture import G

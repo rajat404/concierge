@@ -5,7 +5,7 @@ import os
 import re
 import sys
 
-# Third Party Stuff
+# Third Party Imports
 import six
 from django.db import models
 from django_utils.management.commands import base_command
@@ -56,7 +56,7 @@ LIST_FILTER_THRESHOLD = 25
 RAW_ID_THRESHOLD = 100
 NO_QUERY_DB = False
 
-PRINT_IMPORTS = '''# Third Party Stuff
+PRINT_IMPORTS = '''# Third Party Imports
 from django.contrib import admin
 
 from . import models

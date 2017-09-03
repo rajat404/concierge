@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Third Party Stuff
+# Third Party Imports
 import django_sites as sites
 from django.core.urlresolvers import reverse as django_reverse
 

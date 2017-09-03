@@ -16,7 +16,7 @@ framework.
 # Standard Library
 import os
 
-# Third Party Stuff
+# Third Party Imports
 from django.core.wsgi import get_wsgi_application
 from dotenv import load_dotenv
 from whitenoise.django import DjangoWhiteNoise

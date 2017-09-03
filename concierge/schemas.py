@@ -1,4 +1,4 @@
-# Third Party Stuff
+# Third Party Imports
 from rest_framework.permissions import AllowAny
 from rest_framework.schemas import SchemaGenerator, SchemaView
 from rest_framework_swagger.views import get_swagger_view

@@ -3,7 +3,7 @@
 # Standard Library
 import functools
 
-# Third Party Stuff
+# Third Party Imports
 from django.conf import settings
 from django.db.models import signals
 

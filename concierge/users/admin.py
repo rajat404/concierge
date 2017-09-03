@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Third Party Stuff
+# Third Party Imports
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.contrib.auth.forms import UserChangeForm as DjangoUserChangeForm

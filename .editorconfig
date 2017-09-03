@@ -19,8 +19,8 @@ known_first_party=concierge
 multi_line_output=3
 default_section=THIRDPARTY
 import_heading_stdlib=Standard Library
-import_heading_firstparty=Concierge Stuff
-import_heading_thirdparty=Third Party Stuff
+import_heading_firstparty=Concierge Imports
+import_heading_thirdparty=Third Party Imports
 
 [*.{html,css,scss,json,yml}]
 indent_style = space

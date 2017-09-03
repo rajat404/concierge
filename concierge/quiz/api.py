@@ -1,12 +1,12 @@
 # Standard Library
 import json
 
-# Third Party Stuff
+# Third Party Imports
 from rest_framework import mixins, viewsets
 from rest_framework.parsers import MultiPartParser
 from rest_framework.viewsets import GenericViewSet
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.base import response as rsp
 from concierge.base.api.mixins import MultiSerializerViewSetMixin
 

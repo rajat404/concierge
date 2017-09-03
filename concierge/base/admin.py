@@ -1,4 +1,4 @@
-# Third Party Stuff
+# Third Party Imports
 from django.contrib import admin
 from import_export.admin import ExportMixin
 from simple_history.admin import SimpleHistoryAdmin

@@ -4,7 +4,7 @@
 see: https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-# Third Party Stuff
+# Third Party Imports
 import environ
 from django.utils.translation import ugettext_lazy as _
 

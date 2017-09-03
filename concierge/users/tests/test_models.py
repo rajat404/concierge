@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Third Party Stuff
+# Third Party Imports
 from django.test import TestCase
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.users.models import User
 
 

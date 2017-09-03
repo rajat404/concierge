@@ -2,7 +2,7 @@
 # Standard Library
 import functools
 
-# Third Party Stuff
+# Third Party Imports
 import pytest
 from unittest import mock
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Third Party Stuff
+# Third Party Imports
 import pytest
 from django.core.urlresolvers import reverse
 

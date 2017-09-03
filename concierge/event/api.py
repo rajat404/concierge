@@ -1,8 +1,8 @@
-# Third Party Stuff
+# Third Party Imports
 from rest_framework import mixins
 from rest_framework.viewsets import GenericViewSet
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.base import response as rsp
 
 from .models import Speaker, Event, OfflineEvent

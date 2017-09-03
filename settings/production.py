@@ -11,7 +11,7 @@ Adds sensible default for running app in production.
 # Standard Library
 from email.utils import getaddresses
 
-# Third Party Stuff
+# Third Party Imports
 from django.utils import six
 
 

@@ -3,7 +3,7 @@
 # Standard Library
 import sys
 
-# Third Party Stuff
+# Third Party Imports
 from django import http
 from django.conf import settings
 from django.shortcuts import render

@@ -1,7 +1,7 @@
 # Standard Library
 from collections import OrderedDict
 
-# Third Party Stuff
+# Third Party Imports
 from rest_framework import serializers
 
 

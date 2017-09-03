@@ -3,7 +3,7 @@
 # Standard Library
 import os
 
-# Third Party Stuff
+# Third Party Imports
 from celery import Celery
 from django.conf import settings
 from dotenv import load_dotenv

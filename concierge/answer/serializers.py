@@ -1,7 +1,7 @@
-# Third Party Stuff
+# Third Party Imports
 from rest_framework import serializers
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.quiz.models import Question
 
 from .models import Answer

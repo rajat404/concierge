@@ -1,7 +1,7 @@
 # Standard Library
 import uuid
 
-# Third Party Stuff
+# Third Party Imports
 from autoslug import AutoSlugField
 from django.db import models
 from uuid_upload_path import upload_to

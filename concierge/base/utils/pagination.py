@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Concierge Stuff
-# concierge Stuff
+# concierge Imports
 from concierge.base.api.pagination import PageNumberPagination
 
 

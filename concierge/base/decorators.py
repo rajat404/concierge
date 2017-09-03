@@ -1,4 +1,4 @@
-# Third Party Stuff
+# Third Party Imports
 import waffle
 from decorator import decorator as deco
 

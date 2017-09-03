@@ -1,4 +1,4 @@
-# Concierge Stuff
+# Concierge Imports
 from concierge.base.utils import create_instance
 from concierge.quiz.models import Quiz
 

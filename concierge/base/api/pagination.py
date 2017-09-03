@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Third Party Stuff
+# Third Party Imports
 from rest_framework.pagination import PageNumberPagination as DrfPageNumberPagination
 
 

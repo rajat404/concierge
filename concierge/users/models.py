@@ -1,4 +1,4 @@
-# Third Party Stuff
+# Third Party Imports
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.db.models.signals import post_save
@@ -8,7 +8,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.authtoken.models import Token
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.base.models import UUIDModel
 
 

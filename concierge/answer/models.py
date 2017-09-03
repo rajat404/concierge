@@ -1,9 +1,9 @@
-# Third Party Stuff
+# Third Party Imports
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.participant.models import Participant
 from concierge.quiz.models import AnswerHelper
 

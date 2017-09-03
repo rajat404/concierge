@@ -1,8 +1,8 @@
-# Third Party Stuff
+# Third Party Imports
 from django import forms
 from django.contrib import admin
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.base.admin import ExportAdmin, HistoryExportAdmin
 
 from . import models

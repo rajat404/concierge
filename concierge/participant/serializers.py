@@ -1,7 +1,7 @@
-# Third Party Stuff
+# Third Party Imports
 from rest_framework import serializers
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.event.models import Event
 
 from .models import Participant, ParticipantType, TshirtSize

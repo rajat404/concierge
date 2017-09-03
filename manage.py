@@ -4,7 +4,7 @@
 import os
 import sys
 
-# Third Party Stuff
+# Third Party Imports
 from django.core.management import execute_from_command_line
 from dotenv import load_dotenv
 

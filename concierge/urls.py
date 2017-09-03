@@ -5,14 +5,14 @@ You should put the url config in their respective app putting only a
 refernce to them here.
 """
 
-# Third Party Stuff
+# Third Party Imports
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-# Concierge Stuff
+# Concierge Imports
 from concierge.base import views as base_views
 
 from . import routers, schemas
