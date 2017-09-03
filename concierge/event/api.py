@@ -1,11 +1,9 @@
 # Third Party Stuff
 from rest_framework import mixins
-# from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 # Concierge Stuff
 from concierge.base import response as rsp
-from concierge.base.api.mixins import TemplateNamesMixin
 
 from .models import Speaker, Event, OfflineEvent
 from .serializers import SpeakerSerializer, EventSerializer, OfflineEventSerializer
@@ -26,16 +24,10 @@ class EventViewset(mixins.CreateModelMixin,
                    mixins.RetrieveModelMixin,
                    mixins.UpdateModelMixin,
                    mixins.ListModelMixin,
-                   TemplateNamesMixin,
                    GenericViewSet):
 
     queryset = Event.objects.order_by('start')
     serializer_class = EventSerializer
-    template_name = 'event/list.html'
-    template_names = {
-        'list': 'event/list.html',
-        'retrieve': 'event/detail.html',
-    }
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
