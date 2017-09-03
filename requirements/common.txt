@@ -33,7 +33,7 @@ django-uuid-upload-path==1.0.0
 
 # REST APIs
 # -------------------------------------
-djangorestframework==3.6.3
+djangorestframework==3.6.4
 django-rest-swagger==2.1.2
 djangorestframework-filters==0.10.1
 

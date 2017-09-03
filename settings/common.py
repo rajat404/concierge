@@ -125,7 +125,6 @@ REST_FRAMEWORK = {
         'anon': '10000/day',
     },
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.TokenAuthentication',
 
         # Mainly used for api debug.

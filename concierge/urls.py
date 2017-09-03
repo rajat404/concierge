@@ -44,11 +44,20 @@ urlpatterns += [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.API_DEBUG:
+    from rest_framework.documentation import include_docs_urls
+
+    API_TITLE = 'Concierge'
+    API_DESCRIPTION = 'Collection of all Concierge APIs'
+
     urlpatterns += [
         # Browsable API
         url('^schema/$', schemas.schema_view, name='schema'),
         url(r'^api-playground/$', schemas.swagger_schema_view, name='api-playground'),
         url(r'^api/auth-n/', include('rest_framework.urls', namespace='rest_framework')),
+        # Interactive API Documentation
+        # http://www.django-rest-framework.org/topics/3.6-announcement/
+        url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+
     ]
 
 if settings.DEBUG:
