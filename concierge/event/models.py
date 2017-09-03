@@ -5,11 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 # Concierge Stuff
-from concierge.base.models import TimeStampedModel, TimeStampedSlugUUIDModel, TimeStampedUUIDModel
+from concierge.base.models import SlugModel, TimeStampedModel, UUIDModel
 from concierge.quiz.models import Quiz
 
 
-class Speaker(TimeStampedUUIDModel):
+class Speaker(UUIDModel, TimeStampedModel):
     history = HistoricalRecords(table_name='event_speaker_history')
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
@@ -25,7 +25,7 @@ class Speaker(TimeStampedUUIDModel):
         return '{} {}'.format(self.first_name, self.last_name)
 
 
-class Event(TimeStampedSlugUUIDModel):
+class Event(UUIDModel, TimeStampedModel, SlugModel):
     EVENT_CHOICES = (
         ('EVENT', 'EVENT'),
         ('SESSION', 'SESSION'),
@@ -74,7 +74,7 @@ class Event(TimeStampedSlugUUIDModel):
         return bool(self.participation_open and (self.participation_start <= timezone.now() < self.participation_end))
 
 
-class OfflineEvent(TimeStampedUUIDModel):
+class OfflineEvent(UUIDModel, TimeStampedModel):
     history = HistoricalRecords(table_name='event_offline_event_history')
     event = models.OneToOneField(Event, related_name='offline')
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
@@ -94,7 +94,7 @@ class OfflineEvent(TimeStampedUUIDModel):
         return self.event.slug
 
 
-class Organisation(TimeStampedSlugUUIDModel):
+class Organisation(UUIDModel, TimeStampedModel, SlugModel):
     ORG_CHOICES = (
         ('HOST', 'HOST'),
         ('SPONSOR', 'SPONSOR'),

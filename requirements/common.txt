@@ -64,3 +64,4 @@ docutils==0.13.1  # for admindocs
 django-waffle==0.11.1
 django-import-export==0.5.1
 django-allauth==0.32.0
+django-extensions==1.7.9  # for shell_plus and other utils

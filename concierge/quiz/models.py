@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 # Concierge Stuff
-from concierge.base.models import TimeStampedUUIDModel
+from concierge.base.models import TimeStampedModel, UUIDModel
 
 
-class Question(TimeStampedUUIDModel):
+class Question(UUIDModel, TimeStampedModel):
     ANSWER_CHOICES = (
         ('MCQ', 'MCQ'),
         ('PARAGRAPH', 'PARAGRAPH'),
@@ -42,7 +42,7 @@ class Question(TimeStampedUUIDModel):
         return str(self.id)
 
 
-class Quiz(TimeStampedUUIDModel):
+class Quiz(UUIDModel, TimeStampedModel):
     label = models.CharField(max_length=100, unique=True)
     questions = models.ManyToManyField(Question, blank=True, related_name='quizzes')
 
@@ -55,7 +55,7 @@ class Quiz(TimeStampedUUIDModel):
         return self.label
 
 
-class AnswerHelper(TimeStampedUUIDModel):
+class AnswerHelper(UUIDModel, TimeStampedModel):
     question = models.ForeignKey(Question, related_name='answers')
     text_answer = models.TextField(blank=True)
     choice_answer = ArrayField(models.CharField(max_length=100, blank=True), null=True, blank=True)

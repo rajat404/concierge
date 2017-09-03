@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from simple_history.models import HistoricalRecords
 
 # Concierge Stuff
-from concierge.base.models import TimeStampedUUIDModel
+from concierge.base.models import TimeStampedModel, UUIDModel
 from concierge.event.models import Event
 from concierge.users.models import User
 
@@ -35,7 +35,7 @@ class ParticipantType(models.Model):
         return self.kind
 
 
-class Participant(TimeStampedUUIDModel):
+class Participant(UUIDModel, TimeStampedModel):
     history = HistoricalRecords(table_name='participant_participant_history')
     user = models.ForeignKey(User)
     event = models.ForeignKey(Event)
